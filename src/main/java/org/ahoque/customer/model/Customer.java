@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Customer
@@ -18,6 +19,7 @@ import javax.persistence.Id;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-06-27T20:27:40.252Z[GMT]")
 
 @Entity
+@Table(name = "customer")
 public class Customer   {
 
   @Id

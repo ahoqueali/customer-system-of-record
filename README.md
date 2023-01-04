@@ -89,7 +89,7 @@ Time: 49ms total (execution 47ms / network 2ms)
 
 5. Add demo data
 ```shell
-insert into customer(customerid,firstname) values ('6828f970-73b7-47a1-ae92-bf4d27bafa1c', 'Hoque');
+insert into customer(customer_id,first_name) values ('6828f970-73b7-47a1-ae92-bf4d27bafa1c', 'aHoque');
 
 ```
 
