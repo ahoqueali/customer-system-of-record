@@ -156,7 +156,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReadRole'
+                $ref: '#/components/schemas/ReadRoles'
 
   '/customers/{CustomerId}/roles/{RoleId}/relationship':
     get:
@@ -385,7 +385,8 @@ components:
                   ContactType: SOCIAL_ADDRESS
                   SocialAddress: '@rosspoldark'
 
-    ReadRole:
+
+    ReadRoles:
       type: object
       properties:
         Data:
@@ -394,13 +395,23 @@ components:
             Role:
               type: array
               items:
-                $ref: '#/components/schemas/Role'
-      example:
-        Data:
-          Role:
-            - RoleId: bd30a691-84ab-4e95-9b07-afec05c78805
-              RoleType: HUSBAND
-              RelationshipId: 28537f644-1f3a-4e42-9790-a377769faf75
+                anyOf:
+                  - $ref: '#/components/schemas/AggrementInvolvement'
+                  - $ref: '#/components/schemas/CustomerRelationshipInvolvement'
+          example:
+            Data:
+              Role:
+                - RoleId: 4947cda1-89ef-4397-9166-1a888f1f93ee
+                  RoleType: AGREEMENT_INVOLVEMENT
+                  RoleName: string
+                  RelationshipId: 7e9e0818-a854-46f5-9898-ed7f7dd47cdf
+                - RoleId: 70ec950d-d7cd-4dc7-a004-46ab5cad45c2
+                  RoleType: CUSTOMER_RELATIONSHIP_INVOLVEMENT
+                  RoleName: string
+                  RelationshipId: f714b3ed-d021-4c38-a085-5bff00c8a32c
+                  CustomerRelationshipInvolvementType: CUSTOMER_EMPLOYEE
+
+
 
     ReadRelationship:
       type: object
@@ -578,10 +589,28 @@ components:
         RoleType:
           type: string
           enum:
-            - HUSBAND
-            - WIFE
-            - FATHER
-            - MOTHER
-            - CHILD
+            - CUSTOMER_RELATIONSHIP_INVOLVEMENT
+            - AGREEMENT_INVOLVEMENT
+        RoleName:
+          type: string
+
         RelationshipId:
           $ref: '#/components/schemas/Uuid'
+      discriminator:
+        propertyName: RoleType
+
+    CustomerRelationshipInvolvement:
+      allOf:
+        - $ref: "#/components/schemas/Role"
+        - type: object
+          properties:
+            CustomerRelationshipInvolvementType:
+              enum:
+                - CUSTOMER_EMPLOYEE
+                - SUPPLIER_BANK_EMPLOYER
+                - RELATIONSHIP_MANAGER
+
+    AggrementInvolvement:
+      allOf:
+        - $ref: "#/components/schemas/Role"
+
