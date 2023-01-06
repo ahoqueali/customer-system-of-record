@@ -1,10 +1,10 @@
 # Customer System of Record
-This repository contains a WIP of customer domain system of record (SoR) micro service.  
-The SoR is based on the Banking Industry Architecture Network Customer Domain Model(BIAN).
+This repository contains a WIP of customer system of record.  
+The SoR is based on the Banking Industry Architecture Network Customer Domain Model (BIAN).
 
 ## BIAN Data Model
 The WIP service is based on the BIAN
-[Domain Model](https://bian.org/servicelandscape-9-0/views/view_38585.html)
+[Domain Model](https://bian.org/servicelandscape-11-0-0/views/view_50671.html)
 
 ## API Swagger Spec
 The WIP swagger spec for the APIs can be viewed by clicking on the link..
@@ -98,7 +98,5 @@ insert into customer(customer_id,first_name) values ('6828f970-73b7-47a1-ae92-bf
 
 
 ## References:
-* [BIAN Party Overview](https://bian.org/servicelandscape-9-0/views/view_38585.html)
 * [Cockroach DB](https://www.cockroachlabs.com/docs/stable/create-table.html#create-a-table-with-a-foreign-key-constraint
   )
-* [Github BIAN models](https://github.com/bian-official/public)
