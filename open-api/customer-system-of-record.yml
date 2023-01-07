@@ -98,7 +98,7 @@ paths:
   '/customers/{CustomerId}/location-involvements':
     get:
       tags:
-        - Customer
+        - Location Involvement
       operationId: getCustomerLocations
       parameters:
         - name: CustomerId
@@ -116,10 +116,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ReadCustomerLocationInvolvements'
 
+
   '/customers/{CustomerId}/roles':
     get:
       tags:
-        - Customer
+        - Role
       operationId: getRole
       parameters:
         - name: CustomerId
@@ -137,25 +138,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/ReadRoles'
 
-  '/customers/{CustomerId}/roles/{RoleId}/relationship':
+  '/customers/{CustomerId}/relationships':
     get:
       tags:
-        - Customer
-      operationId: getReleationship
+        - Relationship
+      operationId: getReleationships
       parameters:
         - name: CustomerId
           in: path
           required: true
           schema:
             $ref: "#/components/schemas/Uuid"
-          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-        - name: RoleId
-          in: path
-          required: true
-          schema:
-            $ref: "#/components/schemas/Uuid"
           example:
-            bd30a691-84ab-4e95-9b07-afec05c78805
+            3fa85f64-5717-4562-b3fc-2c963f66afa6
       responses:
         '200':
           description: successful operation
@@ -283,7 +278,6 @@ components:
               $ref: '#/components/schemas/Location3'
 
 
-
     Location3:
       type: object
       properties:
@@ -293,7 +287,12 @@ components:
           type: array
           items:
             anyOf:
-              - $ref: '#/components/schemas/LocationAddress'
+              - $ref: '#/components/schemas/LocationPostalAddress'
+              - $ref: '#/components/schemas/LocationElectronicAddress'
+              - $ref: '#/components/schemas/GeolocationAddress'
+              - $ref: '#/components/schemas/LatitudeAddress'
+              - $ref: '#/components/schemas/LongitudeAddress'
+              - $ref: '#/components/schemas/SocailNetworkAddress'
 
         # CustomerLocation:
         #   type: object
@@ -370,9 +369,8 @@ components:
           type: object
           properties:
             Relationship:
-              type: array
-              items:
-                $ref: '#/components/schemas/Relationship'
+              anyOf:
+                - $ref: '#/components/schemas/Relationship'
       example:
         Data:
           Relationship:
@@ -402,6 +400,7 @@ components:
             - CONTACT_POINT
       discriminator:
         propertyName: LocationType
+
 
     ContactPoint:
       allOf:
@@ -435,60 +434,59 @@ components:
             - LONGITUDE_ADDRESS
             - ELECTRONIC_ADDRESS
 
-    # LocationElectronicAddress:
-    #   allOf:
-    #     - $ref: "#/components/schemas/AddressLocation"
-    #     - type: object
-    #       properties:
-    #         ElectronicAddress:
-    #           type: string
-    #           example: ross.poldark@gmail.com
+    LocationPostalAddress:
+      allOf:
+        - $ref: "#/components/schemas/LocationAddress"
+        - $ref: "#/components/schemas/Address"
 
-    # LocationPostalAddress:
-    #   allOf:
-    #     - $ref: "#/components/schemas/AddressLocation"
-    #     - $ref: "#/components/schemas/Address"
 
-    # GeolocationAddress:
-    #   allOf:
-    #     - $ref: "#/components/schemas/AddressLocation"
-    #     - type: object
-    #       properties:
-    #         Geolocation:
-    #           type: string
-    #           example: some geolocation
+    LocationElectronicAddress:
+      allOf:
+        - $ref: "#/components/schemas/LocationAddress"
+        - type: object
+          properties:
+            ElectronicAddress:
+              type: string
+              example: ross.poldark@gmail.com
 
-    # LatitudeAddress:
-    #   allOf:
-    #     - $ref: "#/components/schemas/AddressLocation"
-    #     - type: object
-    #       properties:
-    #         LatitudeAddress:
-    #           type: string
-    #           example: some latitude address
 
-    # LongitudeAddress:
-    #   allOf:
-    #     - $ref: "#/components/schemas/AddressLocation"
-    #     - type: object
-    #       properties:
-    #         LongitudeAddress:
-    #           type: string
-    #           example: some longitude address
+    GeolocationAddress:
+      allOf:
+        - $ref: "#/components/schemas/LocationAddress"
+        - type: object
+          properties:
+            Geolocation:
+              type: string
+              example: some geolocation
 
-    # ElectronicAddress:
-    #   allOf:
-    #     - $ref: "#/components/schemas/ContactPoint"
-    #     - type: object
-    #       properties:
-    #         ElectronicAddress:
-    #           type: string
-    #           example: ross.poldark@gmail.com
+    LatitudeAddress:
+      allOf:
+        - $ref: "#/components/schemas/LocationAddress"
+        - type: object
+          properties:
+            LatitudeAddress:
+              type: string
+              example: some latitude address
 
-    # PostalAddress:
-    #   allOf:
-    #     - $ref: "#/components/schemas/ContactPoint"
-    #     - $ref: "#/components/schemas/Address"
+    LongitudeAddress:
+      allOf:
+        - $ref: "#/components/schemas/LocationAddress"
+        - type: object
+          properties:
+            LongitudeAddress:
+              type: string
+              example: some longitude address
+
+    SocailNetworkAddress:
+      allOf:
+        - $ref: "#/components/schemas/LocationAddress"
+        - type: object
+          properties:
+            SocailNetworkAddress:
+              type: string
+              example: '@rosspoldark'
+
+
 
     Address:
       type: object
