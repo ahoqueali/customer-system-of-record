@@ -1,9 +1,8 @@
 # Customer System of Record
-This repository contains a WIP of customer system of record.  
-The SoR is based on the Banking Industry Architecture Network Customer Domain Model (BIAN).
+This repository contains a WIP of a customer system of record.  
 
 ## BIAN Data Model
-The WIP service is based on the BIAN
+The domain model borrows ideas from the BIAN.
 [Domain Model](https://bian.org/servicelandscape-11-0-0/views/view_50671.html)
 
 ## API Swagger Spec
