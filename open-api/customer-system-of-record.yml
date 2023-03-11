@@ -391,20 +391,6 @@ components:
                 anyOf:
                   - $ref: '#/components/schemas/AggrementInvolvement'
                   - $ref: '#/components/schemas/CustomerRelationshipInvolvement'
-          example:
-            Data:
-              Role:
-                - RoleId: 4947cda1-89ef-4397-9166-1a888f1f93ee
-                  RoleType: AGREEMENT_INVOLVEMENT
-                  RoleName: string
-                  RelationshipId: 7e9e0818-a854-46f5-9898-ed7f7dd47cdf
-                - RoleId: 70ec950d-d7cd-4dc7-a004-46ab5cad45c2
-                  RoleType: CUSTOMER_RELATIONSHIP_INVOLVEMENT
-                  RoleName: string
-                  RelationshipId: f714b3ed-d021-4c38-a085-5bff00c8a32c
-                  CustomerRelationshipInvolvementType: CUSTOMER_EMPLOYEE
-
-
 
     ReadRelationship:
       type: object
@@ -416,20 +402,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Relationship'
-      example:
-        Data:
-          Relationship:
-            - RelationshipId: 28537f644-1f3a-4e42-9790-a377769faf75
-              RelationshipType: MARRIAGE
-              StartDate: 1997-07-23
-              EndDate:
-              Role:
-                - RoleId: bd30a691-84ab-4e95-9b07-afec05c78805
-                  RoleType: HUSBAND
-                  CustomerId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-                - RoleId: 1a5c9797-c001-4297-ad20-07c825619601
-                  RoleType: WIFE
-                  CustomerId: 15ca8860-66a0-48d8-96b7-1c25e18bfa93
 
     ContactPoint:
       type: object
@@ -580,10 +552,7 @@ components:
         RoleId:
           $ref: '#/components/schemas/Uuid'
         RoleType:
-          type: string
-          enum:
-            - CUSTOMER_RELATIONSHIP_INVOLVEMENT
-            - AGREEMENT_INVOLVEMENT
+          $ref: '#/components/schemas/RoleType'
         RoleName:
           type: string
 
@@ -602,6 +571,12 @@ components:
                 - CUSTOMER_EMPLOYEE
                 - SUPPLIER_BANK_EMPLOYER
                 - RELATIONSHIP_MANAGER
+
+    RoleType:
+      type: string
+      enum:
+        - CUSTOMER_RELATIONSHIP_INVOLVEMENT
+        - AGREEMENT_INVOLVEMENT
 
     AggrementInvolvement:
       allOf:
