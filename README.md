@@ -3,7 +3,7 @@ This repository contains a WIP of a customer system of record.
 
 ## BIAN Data Model
 The domain model borrows ideas from the BIAN.
-[Domain Model](https://bian.org/servicelandscape-11-0-0/views/view_50671.html)
+[Domain Model v9.0](https://bian.org/servicelandscape-9-0/views/view_38585.html)
 
 ## API Swagger Spec
 The WIP swagger spec for the APIs can be viewed by clicking on the link..
