@@ -1,18 +1,18 @@
 package org.ahoque.customer.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.model.Role;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
-import org.threeten.bp.LocalDate;
-import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 
 /**
  * Relationship

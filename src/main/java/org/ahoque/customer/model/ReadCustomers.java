@@ -2,12 +2,9 @@ package org.ahoque.customer.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.model.ReadCustomersData;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
-import javax.validation.constraints.*;
 
 /**
  * ReadCustomers
@@ -16,7 +13,7 @@ import javax.validation.constraints.*;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
 
-public class ReadCustomers   {
+public class ReadCustomers {
   @JsonProperty("Data")
   private ReadCustomersData data = null;
 
