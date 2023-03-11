@@ -3,19 +3,23 @@ package org.ahoque.customer.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.model.Address;
+import io.swagger.model.ContactPoint;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.UUID;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * Address
+ * PostalAddress
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
 
-public class Address   {
+public class PostalAddress extends ContactPoint implements AnyOfReadContactPointsDataContactPointItems {
   @JsonProperty("Line1")
   private String line1 = null;
 
@@ -28,7 +32,7 @@ public class Address   {
   @JsonProperty("Line4")
   private String line4 = null;
 
-  public Address line1(String line1) {
+  public PostalAddress line1(String line1) {
     this.line1 = line1;
     return this;
   }
@@ -47,7 +51,7 @@ public class Address   {
     this.line1 = line1;
   }
 
-  public Address line2(String line2) {
+  public PostalAddress line2(String line2) {
     this.line2 = line2;
     return this;
   }
@@ -66,7 +70,7 @@ public class Address   {
     this.line2 = line2;
   }
 
-  public Address line3(String line3) {
+  public PostalAddress line3(String line3) {
     this.line3 = line3;
     return this;
   }
@@ -85,7 +89,7 @@ public class Address   {
     this.line3 = line3;
   }
 
-  public Address line4(String line4) {
+  public PostalAddress line4(String line4) {
     this.line4 = line4;
     return this;
   }
@@ -113,23 +117,24 @@ public class Address   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Address address = (Address) o;
-    return Objects.equals(this.line1, address.line1) &&
-        Objects.equals(this.line2, address.line2) &&
-        Objects.equals(this.line3, address.line3) &&
-        Objects.equals(this.line4, address.line4);
+    PostalAddress postalAddress = (PostalAddress) o;
+    return Objects.equals(this.line1, postalAddress.line1) &&
+        Objects.equals(this.line2, postalAddress.line2) &&
+        Objects.equals(this.line3, postalAddress.line3) &&
+        Objects.equals(this.line4, postalAddress.line4) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(line1, line2, line3, line4);
+    return Objects.hash(line1, line2, line3, line4, super.hashCode());
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Address {\n");
-    
+    sb.append("class PostalAddress {\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    line1: ").append(toIndentedString(line1)).append("\n");
     sb.append("    line2: ").append(toIndentedString(line2)).append("\n");
     sb.append("    line3: ").append(toIndentedString(line3)).append("\n");
