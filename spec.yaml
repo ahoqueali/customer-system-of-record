@@ -251,6 +251,10 @@ components:
             FirstName:
               type: string
               example: Ross Poldark
+            CustomerType:
+              type: string
+              enum:
+                - PERSON
 
     Organisation:
       allOf:
@@ -260,6 +264,10 @@ components:
             Name:
               type: string
               example: Wheal Leisure
+            CustomerType:
+              type: string
+              enum:
+                - ORGANISATION
 
     ReadCustomerLocations:
       type: object
