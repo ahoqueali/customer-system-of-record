@@ -3,7 +3,7 @@ info:
   title: Customer System of Record - OpenAPI 3.0
   version: 1.0.5
 servers:
-  - url: /api/v1.0
+  - url: localhost:8080/customer-service/v1
 tags:
   - name: Customer
 paths:
