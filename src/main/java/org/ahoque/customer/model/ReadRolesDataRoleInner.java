@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.UUID;
 import org.ahoque.customer.model.AggrementInvolvement;
@@ -23,7 +24,7 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * Role
+ * ReadRolesDataRoleInner
  */
 
 @JsonIgnoreProperties(
@@ -36,8 +37,9 @@ import javax.annotation.Generated;
   @JsonSubTypes.Type(value = CustomerRelationshipInvolvement.class, name = "CustomerRelationshipInvolvement")
 })
 
+@JsonTypeName("ReadRoles_Data_Role_inner")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
-public class Role {
+public class ReadRolesDataRoleInner {
 
   @JsonProperty("RoleId")
   private UUID roleId;
@@ -51,7 +53,47 @@ public class Role {
   @JsonProperty("RelationshipId")
   private UUID relationshipId;
 
-  public Role roleId(UUID roleId) {
+  /**
+   * Gets or Sets customerRelationshipInvolvementType
+   */
+  public enum CustomerRelationshipInvolvementTypeEnum {
+    CUSTOMER_EMPLOYEE("CUSTOMER_EMPLOYEE"),
+    
+    SUPPLIER_BANK_EMPLOYER("SUPPLIER_BANK_EMPLOYER"),
+    
+    RELATIONSHIP_MANAGER("RELATIONSHIP_MANAGER");
+
+    private String value;
+
+    CustomerRelationshipInvolvementTypeEnum(String value) {
+      this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static CustomerRelationshipInvolvementTypeEnum fromValue(String value) {
+      for (CustomerRelationshipInvolvementTypeEnum b : CustomerRelationshipInvolvementTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+  }
+
+  @JsonProperty("CustomerRelationshipInvolvementType")
+  private CustomerRelationshipInvolvementTypeEnum customerRelationshipInvolvementType;
+
+  public ReadRolesDataRoleInner roleId(UUID roleId) {
     this.roleId = roleId;
     return this;
   }
@@ -70,7 +112,7 @@ public class Role {
     this.roleId = roleId;
   }
 
-  public Role roleType(RoleType roleType) {
+  public ReadRolesDataRoleInner roleType(RoleType roleType) {
     this.roleType = roleType;
     return this;
   }
@@ -89,7 +131,7 @@ public class Role {
     this.roleType = roleType;
   }
 
-  public Role roleName(String roleName) {
+  public ReadRolesDataRoleInner roleName(String roleName) {
     this.roleName = roleName;
     return this;
   }
@@ -108,7 +150,7 @@ public class Role {
     this.roleName = roleName;
   }
 
-  public Role relationshipId(UUID relationshipId) {
+  public ReadRolesDataRoleInner relationshipId(UUID relationshipId) {
     this.relationshipId = relationshipId;
     return this;
   }
@@ -127,6 +169,25 @@ public class Role {
     this.relationshipId = relationshipId;
   }
 
+  public ReadRolesDataRoleInner customerRelationshipInvolvementType(CustomerRelationshipInvolvementTypeEnum customerRelationshipInvolvementType) {
+    this.customerRelationshipInvolvementType = customerRelationshipInvolvementType;
+    return this;
+  }
+
+  /**
+   * Get customerRelationshipInvolvementType
+   * @return customerRelationshipInvolvementType
+  */
+  
+  @Schema(name = "CustomerRelationshipInvolvementType", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public CustomerRelationshipInvolvementTypeEnum getCustomerRelationshipInvolvementType() {
+    return customerRelationshipInvolvementType;
+  }
+
+  public void setCustomerRelationshipInvolvementType(CustomerRelationshipInvolvementTypeEnum customerRelationshipInvolvementType) {
+    this.customerRelationshipInvolvementType = customerRelationshipInvolvementType;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -135,26 +196,28 @@ public class Role {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Role role = (Role) o;
-    return Objects.equals(this.roleId, role.roleId) &&
-        Objects.equals(this.roleType, role.roleType) &&
-        Objects.equals(this.roleName, role.roleName) &&
-        Objects.equals(this.relationshipId, role.relationshipId);
+    ReadRolesDataRoleInner readRolesDataRoleInner = (ReadRolesDataRoleInner) o;
+    return Objects.equals(this.roleId, readRolesDataRoleInner.roleId) &&
+        Objects.equals(this.roleType, readRolesDataRoleInner.roleType) &&
+        Objects.equals(this.roleName, readRolesDataRoleInner.roleName) &&
+        Objects.equals(this.relationshipId, readRolesDataRoleInner.relationshipId) &&
+        Objects.equals(this.customerRelationshipInvolvementType, readRolesDataRoleInner.customerRelationshipInvolvementType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(roleId, roleType, roleName, relationshipId);
+    return Objects.hash(roleId, roleType, roleName, relationshipId, customerRelationshipInvolvementType);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Role {\n");
+    sb.append("class ReadRolesDataRoleInner {\n");
     sb.append("    roleId: ").append(toIndentedString(roleId)).append("\n");
     sb.append("    roleType: ").append(toIndentedString(roleType)).append("\n");
     sb.append("    roleName: ").append(toIndentedString(roleName)).append("\n");
     sb.append("    relationshipId: ").append(toIndentedString(relationshipId)).append("\n");
+    sb.append("    customerRelationshipInvolvementType: ").append(toIndentedString(customerRelationshipInvolvementType)).append("\n");
     sb.append("}");
     return sb.toString();
   }

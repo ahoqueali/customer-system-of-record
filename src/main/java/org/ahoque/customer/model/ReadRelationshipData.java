@@ -1,22 +1,31 @@
 package org.ahoque.customer.model;
 
+import java.net.URI;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-
-import javax.validation.Valid;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import org.ahoque.customer.model.Relationship;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * ReadRelationshipData
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
+@JsonTypeName("ReadRelationship_Data")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class ReadRelationshipData {
 
-public class ReadRelationshipData   {
   @JsonProperty("Relationship")
   @Valid
   private List<Relationship> relationship = null;
@@ -28,7 +37,7 @@ public class ReadRelationshipData   {
 
   public ReadRelationshipData addRelationshipItem(Relationship relationshipItem) {
     if (this.relationship == null) {
-      this.relationship = new ArrayList<Relationship>();
+      this.relationship = new ArrayList<>();
     }
     this.relationship.add(relationshipItem);
     return this;
@@ -37,17 +46,16 @@ public class ReadRelationshipData   {
   /**
    * Get relationship
    * @return relationship
-   **/
-  @Schema(description = "")
-      @Valid
-    public List<Relationship> getRelationship() {
+  */
+  @Valid 
+  @Schema(name = "Relationship", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public List<Relationship> getRelationship() {
     return relationship;
   }
 
   public void setRelationship(List<Relationship> relationship) {
     this.relationship = relationship;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -70,7 +78,6 @@ public class ReadRelationshipData   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ReadRelationshipData {\n");
-    
     sb.append("    relationship: ").append(toIndentedString(relationship)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -87,3 +94,4 @@ public class ReadRelationshipData   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

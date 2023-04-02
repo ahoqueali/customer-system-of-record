@@ -7,13 +7,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.UUID;
 import org.ahoque.customer.model.Organisation;
 import org.ahoque.customer.model.Person;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
-import javax.persistence.Entity;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,7 +23,7 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * Customer
+ * ReadCustomersDataCustomerInner
  */
 
 @JsonIgnoreProperties(
@@ -36,9 +36,9 @@ import javax.annotation.Generated;
   @JsonSubTypes.Type(value = Person.class, name = "Person")
 })
 
+@JsonTypeName("ReadCustomers_Data_Customer_inner")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
-@Entity
-public class Customer {
+public class ReadCustomersDataCustomerInner {
 
   @JsonProperty("CustomerId")
   private UUID customerId;
@@ -81,7 +81,10 @@ public class Customer {
   @JsonProperty("CustomerType")
   private CustomerTypeEnum customerType;
 
-  public Customer customerId(UUID customerId) {
+  @JsonProperty("Name")
+  private String name;
+
+  public ReadCustomersDataCustomerInner customerId(UUID customerId) {
     this.customerId = customerId;
     return this;
   }
@@ -100,7 +103,7 @@ public class Customer {
     this.customerId = customerId;
   }
 
-  public Customer customerType(CustomerTypeEnum customerType) {
+  public ReadCustomersDataCustomerInner customerType(CustomerTypeEnum customerType) {
     this.customerType = customerType;
     return this;
   }
@@ -119,6 +122,25 @@ public class Customer {
     this.customerType = customerType;
   }
 
+  public ReadCustomersDataCustomerInner name(String name) {
+    this.name = name;
+    return this;
+  }
+
+  /**
+   * Get name
+   * @return name
+  */
+  
+  @Schema(name = "Name", example = "Wheal Leisure", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -127,22 +149,24 @@ public class Customer {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Customer customer = (Customer) o;
-    return Objects.equals(this.customerId, customer.customerId) &&
-        Objects.equals(this.customerType, customer.customerType);
+    ReadCustomersDataCustomerInner readCustomersDataCustomerInner = (ReadCustomersDataCustomerInner) o;
+    return Objects.equals(this.customerId, readCustomersDataCustomerInner.customerId) &&
+        Objects.equals(this.customerType, readCustomersDataCustomerInner.customerType) &&
+        Objects.equals(this.name, readCustomersDataCustomerInner.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(customerId, customerType);
+    return Objects.hash(customerId, customerType, name);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Customer {\n");
+    sb.append("class ReadCustomersDataCustomerInner {\n");
     sb.append("    customerId: ").append(toIndentedString(customerId)).append("\n");
     sb.append("    customerType: ").append(toIndentedString(customerType)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }

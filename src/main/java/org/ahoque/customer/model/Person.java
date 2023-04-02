@@ -1,21 +1,36 @@
 package org.ahoque.customer.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.UUID;
+import org.ahoque.customer.model.Customer;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * Person
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
 
-public class Person extends Customer implements OneOfReadCustomerDataCustomer, AnyOfReadCustomersDataCustomerItems, OneOfWriteCustomerDataCustomer {
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class Person extends Customer implements WriteCustomerDataCustomer {
+
   @JsonProperty("FirstName")
-  private String firstName = null;
+  private String firstName;
 
   public Person firstName(String firstName) {
     this.firstName = firstName;
@@ -25,10 +40,10 @@ public class Person extends Customer implements OneOfReadCustomerDataCustomer, A
   /**
    * Get firstName
    * @return firstName
-   **/
-  @Schema(example = "Ross Poldark", description = "")
+  */
   
-    public String getFirstName() {
+  @Schema(name = "FirstName", example = "Ross Poldark", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getFirstName() {
     return firstName;
   }
 
@@ -36,6 +51,15 @@ public class Person extends Customer implements OneOfReadCustomerDataCustomer, A
     this.firstName = firstName;
   }
 
+  public Person customerId(UUID customerId) {
+    super.setCustomerId(customerId);
+    return this;
+  }
+
+  public Person customerType(CustomerTypeEnum customerType) {
+    super.setCustomerType(customerType);
+    return this;
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -76,3 +100,4 @@ public class Person extends Customer implements OneOfReadCustomerDataCustomer, A
     return o.toString().replace("\n", "\n    ");
   }
 }
+

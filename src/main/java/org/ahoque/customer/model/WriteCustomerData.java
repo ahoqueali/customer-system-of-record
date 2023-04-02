@@ -1,23 +1,33 @@
 package org.ahoque.customer.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.ahoque.customer.model.WriteCustomerDataCustomer;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * WriteCustomerData
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
+@JsonTypeName("WriteCustomer_Data")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class WriteCustomerData {
 
-public class WriteCustomerData   {
   @JsonProperty("Customer")
-  private OneOfWriteCustomerDataCustomer customer = null;
+  private WriteCustomerDataCustomer customer;
 
-  public WriteCustomerData customer(OneOfWriteCustomerDataCustomer customer) {
+  public WriteCustomerData customer(WriteCustomerDataCustomer customer) {
     this.customer = customer;
     return this;
   }
@@ -25,17 +35,16 @@ public class WriteCustomerData   {
   /**
    * Get customer
    * @return customer
-   **/
-  @Schema(description = "")
-  
-    public OneOfWriteCustomerDataCustomer getCustomer() {
+  */
+  @Valid 
+  @Schema(name = "Customer", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public WriteCustomerDataCustomer getCustomer() {
     return customer;
   }
 
-  public void setCustomer(OneOfWriteCustomerDataCustomer customer) {
+  public void setCustomer(WriteCustomerDataCustomer customer) {
     this.customer = customer;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -58,7 +67,6 @@ public class WriteCustomerData   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class WriteCustomerData {\n");
-    
     sb.append("    customer: ").append(toIndentedString(customer)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -75,3 +83,4 @@ public class WriteCustomerData   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

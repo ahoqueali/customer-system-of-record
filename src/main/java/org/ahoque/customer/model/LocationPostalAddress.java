@@ -1,30 +1,125 @@
 package org.ahoque.customer.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * LocationPostalAddress
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class LocationPostalAddress implements CustomerLocationLocation {
 
-public class LocationPostalAddress extends LocationAddress implements OneOfCustomerLocationLocation {
+  @JsonProperty("LocationId")
+  private UUID locationId;
+
+  /**
+   * Gets or Sets locationType
+   */
+  public enum LocationTypeEnum {
+    LOCATION_ELECTRONIC_ADDRESS("LOCATION_ELECTRONIC_ADDRESS"),
+    
+    LOCATION_POSTAL_ADDRESS("LOCATION_POSTAL_ADDRESS"),
+    
+    GEOLOCATION_ADDRESS("GEOLOCATION_ADDRESS"),
+    
+    LATITUDE_ADDRESS("LATITUDE_ADDRESS"),
+    
+    LONGITUDE_ADDRESS("LONGITUDE_ADDRESS");
+
+    private String value;
+
+    LocationTypeEnum(String value) {
+      this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static LocationTypeEnum fromValue(String value) {
+      for (LocationTypeEnum b : LocationTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+  }
+
+  @JsonProperty("LocationType")
+  private LocationTypeEnum locationType;
+
   @JsonProperty("Line1")
-  private String line1 = null;
+  private String line1;
 
   @JsonProperty("Line2")
-  private String line2 = null;
+  private String line2;
 
   @JsonProperty("Line3")
-  private String line3 = null;
+  private String line3;
 
   @JsonProperty("Line4")
-  private String line4 = null;
+  private String line4;
+
+  public LocationPostalAddress locationId(UUID locationId) {
+    this.locationId = locationId;
+    return this;
+  }
+
+  /**
+   * Get locationId
+   * @return locationId
+  */
+  @Valid @Size(min = 36, max = 36) 
+  @Schema(name = "LocationId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public UUID getLocationId() {
+    return locationId;
+  }
+
+  public void setLocationId(UUID locationId) {
+    this.locationId = locationId;
+  }
+
+  public LocationPostalAddress locationType(LocationTypeEnum locationType) {
+    this.locationType = locationType;
+    return this;
+  }
+
+  /**
+   * Get locationType
+   * @return locationType
+  */
+  
+  @Schema(name = "LocationType", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public LocationTypeEnum getLocationType() {
+    return locationType;
+  }
+
+  public void setLocationType(LocationTypeEnum locationType) {
+    this.locationType = locationType;
+  }
 
   public LocationPostalAddress line1(String line1) {
     this.line1 = line1;
@@ -34,10 +129,10 @@ public class LocationPostalAddress extends LocationAddress implements OneOfCusto
   /**
    * Get line1
    * @return line1
-   **/
-  @Schema(description = "")
+  */
   
-    public String getLine1() {
+  @Schema(name = "Line1", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getLine1() {
     return line1;
   }
 
@@ -53,10 +148,10 @@ public class LocationPostalAddress extends LocationAddress implements OneOfCusto
   /**
    * Get line2
    * @return line2
-   **/
-  @Schema(description = "")
+  */
   
-    public String getLine2() {
+  @Schema(name = "Line2", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getLine2() {
     return line2;
   }
 
@@ -72,10 +167,10 @@ public class LocationPostalAddress extends LocationAddress implements OneOfCusto
   /**
    * Get line3
    * @return line3
-   **/
-  @Schema(description = "")
+  */
   
-    public String getLine3() {
+  @Schema(name = "Line3", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getLine3() {
     return line3;
   }
 
@@ -91,17 +186,16 @@ public class LocationPostalAddress extends LocationAddress implements OneOfCusto
   /**
    * Get line4
    * @return line4
-   **/
-  @Schema(description = "")
+  */
   
-    public String getLine4() {
+  @Schema(name = "Line4", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getLine4() {
     return line4;
   }
 
   public void setLine4(String line4) {
     this.line4 = line4;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -112,23 +206,25 @@ public class LocationPostalAddress extends LocationAddress implements OneOfCusto
       return false;
     }
     LocationPostalAddress locationPostalAddress = (LocationPostalAddress) o;
-    return Objects.equals(this.line1, locationPostalAddress.line1) &&
+    return Objects.equals(this.locationId, locationPostalAddress.locationId) &&
+        Objects.equals(this.locationType, locationPostalAddress.locationType) &&
+        Objects.equals(this.line1, locationPostalAddress.line1) &&
         Objects.equals(this.line2, locationPostalAddress.line2) &&
         Objects.equals(this.line3, locationPostalAddress.line3) &&
-        Objects.equals(this.line4, locationPostalAddress.line4) &&
-        super.equals(o);
+        Objects.equals(this.line4, locationPostalAddress.line4);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(line1, line2, line3, line4, super.hashCode());
+    return Objects.hash(locationId, locationType, line1, line2, line3, line4);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class LocationPostalAddress {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    locationId: ").append(toIndentedString(locationId)).append("\n");
+    sb.append("    locationType: ").append(toIndentedString(locationType)).append("\n");
     sb.append("    line1: ").append(toIndentedString(line1)).append("\n");
     sb.append("    line2: ").append(toIndentedString(line2)).append("\n");
     sb.append("    line3: ").append(toIndentedString(line3)).append("\n");
@@ -148,3 +244,4 @@ public class LocationPostalAddress extends LocationAddress implements OneOfCusto
     return o.toString().replace("\n", "\n    ");
   }
 }
+

@@ -1,25 +1,30 @@
 package org.ahoque.customer.model;
 
+import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.UUID;
-import org.springframework.validation.annotation.Validated;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * LocationAddress
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class LocationAddress {
 
-public class LocationAddress   {
   @JsonProperty("LocationId")
-  private UUID locationId = null;
+  private UUID locationId;
 
   /**
    * Gets or Sets locationType
@@ -41,24 +46,29 @@ public class LocationAddress   {
       this.value = value;
     }
 
-    @Override
     @JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
     public String toString() {
       return String.valueOf(value);
     }
 
     @JsonCreator
-    public static LocationTypeEnum fromValue(String text) {
+    public static LocationTypeEnum fromValue(String value) {
       for (LocationTypeEnum b : LocationTypeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
+        if (b.value.equals(value)) {
           return b;
         }
       }
-      return null;
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
   }
+
   @JsonProperty("LocationType")
-  private LocationTypeEnum locationType = null;
+  private LocationTypeEnum locationType;
 
   public LocationAddress locationId(UUID locationId) {
     this.locationId = locationId;
@@ -68,11 +78,10 @@ public class LocationAddress   {
   /**
    * Get locationId
    * @return locationId
-   **/
-  @Schema(description = "")
-  
-    @Valid
-  @Size(min=36,max=36)   public UUID getLocationId() {
+  */
+  @Valid @Size(min = 36, max = 36) 
+  @Schema(name = "LocationId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public UUID getLocationId() {
     return locationId;
   }
 
@@ -88,17 +97,16 @@ public class LocationAddress   {
   /**
    * Get locationType
    * @return locationType
-   **/
-  @Schema(description = "")
+  */
   
-    public LocationTypeEnum getLocationType() {
+  @Schema(name = "LocationType", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public LocationTypeEnum getLocationType() {
     return locationType;
   }
 
   public void setLocationType(LocationTypeEnum locationType) {
     this.locationType = locationType;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -122,7 +130,6 @@ public class LocationAddress   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class LocationAddress {\n");
-    
     sb.append("    locationId: ").append(toIndentedString(locationId)).append("\n");
     sb.append("    locationType: ").append(toIndentedString(locationType)).append("\n");
     sb.append("}");
@@ -140,3 +147,4 @@ public class LocationAddress   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

@@ -1,33 +1,43 @@
 package org.ahoque.customer.model;
 
+import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.validation.annotation.Validated;
+import org.ahoque.customer.model.ReadCustomersDataCustomerInner;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
 import javax.validation.Valid;
+import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * ReadCustomersData
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
+@JsonTypeName("ReadCustomers_Data")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class ReadCustomersData {
 
-public class ReadCustomersData   {
   @JsonProperty("Customer")
   @Valid
-  private List<AnyOfReadCustomersDataCustomerItems> customer = null;
+  private List<ReadCustomersDataCustomerInner> customer = null;
 
-  public ReadCustomersData customer(List<AnyOfReadCustomersDataCustomerItems> customer) {
+  public ReadCustomersData customer(List<ReadCustomersDataCustomerInner> customer) {
     this.customer = customer;
     return this;
   }
 
-  public ReadCustomersData addCustomerItem(AnyOfReadCustomersDataCustomerItems customerItem) {
+  public ReadCustomersData addCustomerItem(ReadCustomersDataCustomerInner customerItem) {
     if (this.customer == null) {
-      this.customer = new ArrayList<AnyOfReadCustomersDataCustomerItems>();
+      this.customer = new ArrayList<>();
     }
     this.customer.add(customerItem);
     return this;
@@ -36,17 +46,16 @@ public class ReadCustomersData   {
   /**
    * Get customer
    * @return customer
-   **/
-  @Schema(description = "")
-  
-    public List<AnyOfReadCustomersDataCustomerItems> getCustomer() {
+  */
+  @Valid 
+  @Schema(name = "Customer", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public List<ReadCustomersDataCustomerInner> getCustomer() {
     return customer;
   }
 
-  public void setCustomer(List<AnyOfReadCustomersDataCustomerItems> customer) {
+  public void setCustomer(List<ReadCustomersDataCustomerInner> customer) {
     this.customer = customer;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -69,7 +78,6 @@ public class ReadCustomersData   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ReadCustomersData {\n");
-    
     sb.append("    customer: ").append(toIndentedString(customer)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -86,3 +94,4 @@ public class ReadCustomersData   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

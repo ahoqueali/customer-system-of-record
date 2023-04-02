@@ -5,9 +5,6 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import java.util.ArrayList;
-import java.util.List;
-import org.ahoque.customer.model.ReadRolesDataRoleInner;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -19,42 +16,33 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * ReadRolesData
+ * PersonAllOf
  */
 
-@JsonTypeName("ReadRoles_Data")
+@JsonTypeName("Person_allOf")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
-public class ReadRolesData {
+public class PersonAllOf {
 
-  @JsonProperty("Role")
-  @Valid
-  private List<ReadRolesDataRoleInner> role = null;
+  @JsonProperty("FirstName")
+  private String firstName;
 
-  public ReadRolesData role(List<ReadRolesDataRoleInner> role) {
-    this.role = role;
-    return this;
-  }
-
-  public ReadRolesData addRoleItem(ReadRolesDataRoleInner roleItem) {
-    if (this.role == null) {
-      this.role = new ArrayList<>();
-    }
-    this.role.add(roleItem);
+  public PersonAllOf firstName(String firstName) {
+    this.firstName = firstName;
     return this;
   }
 
   /**
-   * Get role
-   * @return role
+   * Get firstName
+   * @return firstName
   */
-  @Valid 
-  @Schema(name = "Role", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public List<ReadRolesDataRoleInner> getRole() {
-    return role;
+  
+  @Schema(name = "FirstName", example = "Ross Poldark", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setRole(List<ReadRolesDataRoleInner> role) {
-    this.role = role;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
   }
 
   @Override
@@ -65,20 +53,20 @@ public class ReadRolesData {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ReadRolesData readRolesData = (ReadRolesData) o;
-    return Objects.equals(this.role, readRolesData.role);
+    PersonAllOf personAllOf = (PersonAllOf) o;
+    return Objects.equals(this.firstName, personAllOf.firstName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(role);
+    return Objects.hash(firstName);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ReadRolesData {\n");
-    sb.append("    role: ").append(toIndentedString(role)).append("\n");
+    sb.append("class PersonAllOf {\n");
+    sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

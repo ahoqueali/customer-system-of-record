@@ -1,23 +1,33 @@
 package org.ahoque.customer.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.ahoque.customer.model.WriteCustomerDataCustomer;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * ReadCustomerData
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
+@JsonTypeName("ReadCustomer_Data")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class ReadCustomerData {
 
-public class ReadCustomerData   {
   @JsonProperty("Customer")
-  private OneOfReadCustomerDataCustomer customer = null;
+  private WriteCustomerDataCustomer customer;
 
-  public ReadCustomerData customer(OneOfReadCustomerDataCustomer customer) {
+  public ReadCustomerData customer(WriteCustomerDataCustomer customer) {
     this.customer = customer;
     return this;
   }
@@ -25,17 +35,16 @@ public class ReadCustomerData   {
   /**
    * Get customer
    * @return customer
-   **/
-  @Schema(description = "")
-  
-    public OneOfReadCustomerDataCustomer getCustomer() {
+  */
+  @Valid 
+  @Schema(name = "Customer", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public WriteCustomerDataCustomer getCustomer() {
     return customer;
   }
 
-  public void setCustomer(OneOfReadCustomerDataCustomer customer) {
+  public void setCustomer(WriteCustomerDataCustomer customer) {
     this.customer = customer;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -58,7 +67,6 @@ public class ReadCustomerData   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ReadCustomerData {\n");
-    
     sb.append("    customer: ").append(toIndentedString(customer)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -75,3 +83,4 @@ public class ReadCustomerData   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

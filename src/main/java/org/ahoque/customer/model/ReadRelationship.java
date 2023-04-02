@@ -1,22 +1,29 @@
 package org.ahoque.customer.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-
-import javax.validation.Valid;
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import org.ahoque.customer.model.ReadRelationshipData;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * ReadRelationship
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class ReadRelationship {
 
-public class ReadRelationship   {
   @JsonProperty("Data")
-  private ReadRelationshipData data = null;
+  private ReadRelationshipData data;
 
   public ReadRelationship data(ReadRelationshipData data) {
     this.data = data;
@@ -26,18 +33,16 @@ public class ReadRelationship   {
   /**
    * Get data
    * @return data
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public ReadRelationshipData getData() {
+  */
+  @Valid 
+  @Schema(name = "Data", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public ReadRelationshipData getData() {
     return data;
   }
 
   public void setData(ReadRelationshipData data) {
     this.data = data;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -60,7 +65,6 @@ public class ReadRelationship   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ReadRelationship {\n");
-    
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -77,3 +81,4 @@ public class ReadRelationship   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

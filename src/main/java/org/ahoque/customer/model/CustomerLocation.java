@@ -1,32 +1,42 @@
 package org.ahoque.customer.model;
 
+import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.UUID;
-import org.springframework.validation.annotation.Validated;
+import org.ahoque.customer.model.CustomerLocationLocation;
+import org.ahoque.customer.model.LocationRoleTypeValues;
+import org.ahoque.customer.model.LocationTypeValues;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * CustomerLocation
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class CustomerLocation {
 
-public class CustomerLocation   {
   @JsonProperty("CustomerLocationid")
-  private UUID customerLocationid = null;
+  private UUID customerLocationid;
 
   @JsonProperty("LocationRole")
-  private LocationRoleTypeValues locationRole = null;
+  private LocationRoleTypeValues locationRole;
 
   @JsonProperty("LocationType")
-  private LocationTypeValues locationType = null;
+  private LocationTypeValues locationType;
 
   @JsonProperty("Location")
-  private OneOfCustomerLocationLocation location = null;
+  private CustomerLocationLocation location;
 
   public CustomerLocation customerLocationid(UUID customerLocationid) {
     this.customerLocationid = customerLocationid;
@@ -36,11 +46,10 @@ public class CustomerLocation   {
   /**
    * Get customerLocationid
    * @return customerLocationid
-   **/
-  @Schema(description = "")
-  
-    @Valid
-  @Size(min=36,max=36)   public UUID getCustomerLocationid() {
+  */
+  @Valid @Size(min = 36, max = 36) 
+  @Schema(name = "CustomerLocationid", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public UUID getCustomerLocationid() {
     return customerLocationid;
   }
 
@@ -56,11 +65,10 @@ public class CustomerLocation   {
   /**
    * Get locationRole
    * @return locationRole
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public LocationRoleTypeValues getLocationRole() {
+  */
+  @Valid 
+  @Schema(name = "LocationRole", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public LocationRoleTypeValues getLocationRole() {
     return locationRole;
   }
 
@@ -76,11 +84,10 @@ public class CustomerLocation   {
   /**
    * Get locationType
    * @return locationType
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public LocationTypeValues getLocationType() {
+  */
+  @Valid 
+  @Schema(name = "LocationType", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public LocationTypeValues getLocationType() {
     return locationType;
   }
 
@@ -88,7 +95,7 @@ public class CustomerLocation   {
     this.locationType = locationType;
   }
 
-  public CustomerLocation location(OneOfCustomerLocationLocation location) {
+  public CustomerLocation location(CustomerLocationLocation location) {
     this.location = location;
     return this;
   }
@@ -96,17 +103,16 @@ public class CustomerLocation   {
   /**
    * Get location
    * @return location
-   **/
-  @Schema(description = "")
-  
-    public OneOfCustomerLocationLocation getLocation() {
+  */
+  @Valid 
+  @Schema(name = "Location", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public CustomerLocationLocation getLocation() {
     return location;
   }
 
-  public void setLocation(OneOfCustomerLocationLocation location) {
+  public void setLocation(CustomerLocationLocation location) {
     this.location = location;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -132,7 +138,6 @@ public class CustomerLocation   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CustomerLocation {\n");
-    
     sb.append("    customerLocationid: ").append(toIndentedString(customerLocationid)).append("\n");
     sb.append("    locationRole: ").append(toIndentedString(locationRole)).append("\n");
     sb.append("    locationType: ").append(toIndentedString(locationType)).append("\n");
@@ -152,3 +157,4 @@ public class CustomerLocation   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

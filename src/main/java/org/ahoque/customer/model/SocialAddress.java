@@ -1,21 +1,113 @@
 package org.ahoque.customer.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.UUID;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * SocialAddress
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class SocialAddress {
 
-public class SocialAddress extends ContactPoint implements AnyOfReadContactPointsDataContactPointItems {
+  @JsonProperty("ContactId")
+  private UUID contactId;
+
+  /**
+   * Gets or Sets contactType
+   */
+  public enum ContactTypeEnum {
+    ELECTRONIC_ADDRESS("ELECTRONIC_ADDRESS"),
+    
+    POSTAL_ADDRESS("POSTAL_ADDRESS"),
+    
+    PHONE_ADDRESS("PHONE_ADDRESS"),
+    
+    SOCIAL_ADDRESS("SOCIAL_ADDRESS");
+
+    private String value;
+
+    ContactTypeEnum(String value) {
+      this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static ContactTypeEnum fromValue(String value) {
+      for (ContactTypeEnum b : ContactTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+  }
+
+  @JsonProperty("ContactType")
+  private ContactTypeEnum contactType;
+
   @JsonProperty("SocialAddress")
-  private String socialAddress = null;
+  private String socialAddress;
+
+  public SocialAddress contactId(UUID contactId) {
+    this.contactId = contactId;
+    return this;
+  }
+
+  /**
+   * Get contactId
+   * @return contactId
+  */
+  @Valid @Size(min = 36, max = 36) 
+  @Schema(name = "ContactId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public UUID getContactId() {
+    return contactId;
+  }
+
+  public void setContactId(UUID contactId) {
+    this.contactId = contactId;
+  }
+
+  public SocialAddress contactType(ContactTypeEnum contactType) {
+    this.contactType = contactType;
+    return this;
+  }
+
+  /**
+   * Get contactType
+   * @return contactType
+  */
+  @NotNull 
+  @Schema(name = "ContactType", requiredMode = Schema.RequiredMode.REQUIRED)
+  public ContactTypeEnum getContactType() {
+    return contactType;
+  }
+
+  public void setContactType(ContactTypeEnum contactType) {
+    this.contactType = contactType;
+  }
 
   public SocialAddress socialAddress(String socialAddress) {
     this.socialAddress = socialAddress;
@@ -25,17 +117,16 @@ public class SocialAddress extends ContactPoint implements AnyOfReadContactPoint
   /**
    * Get socialAddress
    * @return socialAddress
-   **/
-  @Schema(example = "@rosspoldark", description = "")
+  */
   
-    public String getSocialAddress() {
+  @Schema(name = "SocialAddress", example = "@rosspoldark", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getSocialAddress() {
     return socialAddress;
   }
 
   public void setSocialAddress(String socialAddress) {
     this.socialAddress = socialAddress;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -46,20 +137,22 @@ public class SocialAddress extends ContactPoint implements AnyOfReadContactPoint
       return false;
     }
     SocialAddress socialAddress = (SocialAddress) o;
-    return Objects.equals(this.socialAddress, socialAddress.socialAddress) &&
-        super.equals(o);
+    return Objects.equals(this.contactId, socialAddress.contactId) &&
+        Objects.equals(this.contactType, socialAddress.contactType) &&
+        Objects.equals(this.socialAddress, socialAddress.socialAddress);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(socialAddress, super.hashCode());
+    return Objects.hash(contactId, contactType, socialAddress);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SocialAddress {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    contactId: ").append(toIndentedString(contactId)).append("\n");
+    sb.append("    contactType: ").append(toIndentedString(contactType)).append("\n");
     sb.append("    socialAddress: ").append(toIndentedString(socialAddress)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -76,3 +169,4 @@ public class SocialAddress extends ContactPoint implements AnyOfReadContactPoint
     return o.toString().replace("\n", "\n    ");
   }
 }
+

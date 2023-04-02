@@ -5,9 +5,6 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import java.util.ArrayList;
-import java.util.List;
-import org.ahoque.customer.model.ReadRolesDataRoleInner;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -19,42 +16,33 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * ReadRolesData
+ * PhoneAddressAllOf
  */
 
-@JsonTypeName("ReadRoles_Data")
+@JsonTypeName("PhoneAddress_allOf")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
-public class ReadRolesData {
+public class PhoneAddressAllOf {
 
-  @JsonProperty("Role")
-  @Valid
-  private List<ReadRolesDataRoleInner> role = null;
+  @JsonProperty("PhoneAddress")
+  private String phoneAddress;
 
-  public ReadRolesData role(List<ReadRolesDataRoleInner> role) {
-    this.role = role;
-    return this;
-  }
-
-  public ReadRolesData addRoleItem(ReadRolesDataRoleInner roleItem) {
-    if (this.role == null) {
-      this.role = new ArrayList<>();
-    }
-    this.role.add(roleItem);
+  public PhoneAddressAllOf phoneAddress(String phoneAddress) {
+    this.phoneAddress = phoneAddress;
     return this;
   }
 
   /**
-   * Get role
-   * @return role
+   * Get phoneAddress
+   * @return phoneAddress
   */
-  @Valid 
-  @Schema(name = "Role", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  public List<ReadRolesDataRoleInner> getRole() {
-    return role;
+  
+  @Schema(name = "PhoneAddress", example = "0694234332434", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getPhoneAddress() {
+    return phoneAddress;
   }
 
-  public void setRole(List<ReadRolesDataRoleInner> role) {
-    this.role = role;
+  public void setPhoneAddress(String phoneAddress) {
+    this.phoneAddress = phoneAddress;
   }
 
   @Override
@@ -65,20 +53,20 @@ public class ReadRolesData {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ReadRolesData readRolesData = (ReadRolesData) o;
-    return Objects.equals(this.role, readRolesData.role);
+    PhoneAddressAllOf phoneAddressAllOf = (PhoneAddressAllOf) o;
+    return Objects.equals(this.phoneAddress, phoneAddressAllOf.phoneAddress);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(role);
+    return Objects.hash(phoneAddress);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ReadRolesData {\n");
-    sb.append("    role: ").append(toIndentedString(role)).append("\n");
+    sb.append("class PhoneAddressAllOf {\n");
+    sb.append("    phoneAddress: ").append(toIndentedString(phoneAddress)).append("\n");
     sb.append("}");
     return sb.toString();
   }

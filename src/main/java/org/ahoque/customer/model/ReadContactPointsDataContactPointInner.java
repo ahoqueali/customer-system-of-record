@@ -4,8 +4,13 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.UUID;
+import org.ahoque.customer.model.ElectronicAddress;
+import org.ahoque.customer.model.PhoneAddress;
+import org.ahoque.customer.model.PostalAddress;
+import org.ahoque.customer.model.SocialAddress;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -17,11 +22,12 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * PostalAddress
+ * ReadContactPointsDataContactPointInner
  */
 
+@JsonTypeName("ReadContactPoints_Data_ContactPoint_inner")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
-public class PostalAddress {
+public class ReadContactPointsDataContactPointInner {
 
   @JsonProperty("ContactId")
   private UUID contactId;
@@ -68,6 +74,9 @@ public class PostalAddress {
   @JsonProperty("ContactType")
   private ContactTypeEnum contactType;
 
+  @JsonProperty("ElectronicAddress")
+  private String electronicAddress;
+
   @JsonProperty("Line1")
   private String line1;
 
@@ -80,7 +89,13 @@ public class PostalAddress {
   @JsonProperty("Line4")
   private String line4;
 
-  public PostalAddress contactId(UUID contactId) {
+  @JsonProperty("PhoneAddress")
+  private String phoneAddress;
+
+  @JsonProperty("SocialAddress")
+  private String socialAddress;
+
+  public ReadContactPointsDataContactPointInner contactId(UUID contactId) {
     this.contactId = contactId;
     return this;
   }
@@ -99,7 +114,7 @@ public class PostalAddress {
     this.contactId = contactId;
   }
 
-  public PostalAddress contactType(ContactTypeEnum contactType) {
+  public ReadContactPointsDataContactPointInner contactType(ContactTypeEnum contactType) {
     this.contactType = contactType;
     return this;
   }
@@ -118,7 +133,26 @@ public class PostalAddress {
     this.contactType = contactType;
   }
 
-  public PostalAddress line1(String line1) {
+  public ReadContactPointsDataContactPointInner electronicAddress(String electronicAddress) {
+    this.electronicAddress = electronicAddress;
+    return this;
+  }
+
+  /**
+   * Get electronicAddress
+   * @return electronicAddress
+  */
+  
+  @Schema(name = "ElectronicAddress", example = "ross.poldark@gmail.com", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getElectronicAddress() {
+    return electronicAddress;
+  }
+
+  public void setElectronicAddress(String electronicAddress) {
+    this.electronicAddress = electronicAddress;
+  }
+
+  public ReadContactPointsDataContactPointInner line1(String line1) {
     this.line1 = line1;
     return this;
   }
@@ -137,7 +171,7 @@ public class PostalAddress {
     this.line1 = line1;
   }
 
-  public PostalAddress line2(String line2) {
+  public ReadContactPointsDataContactPointInner line2(String line2) {
     this.line2 = line2;
     return this;
   }
@@ -156,7 +190,7 @@ public class PostalAddress {
     this.line2 = line2;
   }
 
-  public PostalAddress line3(String line3) {
+  public ReadContactPointsDataContactPointInner line3(String line3) {
     this.line3 = line3;
     return this;
   }
@@ -175,7 +209,7 @@ public class PostalAddress {
     this.line3 = line3;
   }
 
-  public PostalAddress line4(String line4) {
+  public ReadContactPointsDataContactPointInner line4(String line4) {
     this.line4 = line4;
     return this;
   }
@@ -194,6 +228,44 @@ public class PostalAddress {
     this.line4 = line4;
   }
 
+  public ReadContactPointsDataContactPointInner phoneAddress(String phoneAddress) {
+    this.phoneAddress = phoneAddress;
+    return this;
+  }
+
+  /**
+   * Get phoneAddress
+   * @return phoneAddress
+  */
+  
+  @Schema(name = "PhoneAddress", example = "0694234332434", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getPhoneAddress() {
+    return phoneAddress;
+  }
+
+  public void setPhoneAddress(String phoneAddress) {
+    this.phoneAddress = phoneAddress;
+  }
+
+  public ReadContactPointsDataContactPointInner socialAddress(String socialAddress) {
+    this.socialAddress = socialAddress;
+    return this;
+  }
+
+  /**
+   * Get socialAddress
+   * @return socialAddress
+  */
+  
+  @Schema(name = "SocialAddress", example = "@rosspoldark", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getSocialAddress() {
+    return socialAddress;
+  }
+
+  public void setSocialAddress(String socialAddress) {
+    this.socialAddress = socialAddress;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -202,30 +274,36 @@ public class PostalAddress {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PostalAddress postalAddress = (PostalAddress) o;
-    return Objects.equals(this.contactId, postalAddress.contactId) &&
-        Objects.equals(this.contactType, postalAddress.contactType) &&
-        Objects.equals(this.line1, postalAddress.line1) &&
-        Objects.equals(this.line2, postalAddress.line2) &&
-        Objects.equals(this.line3, postalAddress.line3) &&
-        Objects.equals(this.line4, postalAddress.line4);
+    ReadContactPointsDataContactPointInner readContactPointsDataContactPointInner = (ReadContactPointsDataContactPointInner) o;
+    return Objects.equals(this.contactId, readContactPointsDataContactPointInner.contactId) &&
+        Objects.equals(this.contactType, readContactPointsDataContactPointInner.contactType) &&
+        Objects.equals(this.electronicAddress, readContactPointsDataContactPointInner.electronicAddress) &&
+        Objects.equals(this.line1, readContactPointsDataContactPointInner.line1) &&
+        Objects.equals(this.line2, readContactPointsDataContactPointInner.line2) &&
+        Objects.equals(this.line3, readContactPointsDataContactPointInner.line3) &&
+        Objects.equals(this.line4, readContactPointsDataContactPointInner.line4) &&
+        Objects.equals(this.phoneAddress, readContactPointsDataContactPointInner.phoneAddress) &&
+        Objects.equals(this.socialAddress, readContactPointsDataContactPointInner.socialAddress);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(contactId, contactType, line1, line2, line3, line4);
+    return Objects.hash(contactId, contactType, electronicAddress, line1, line2, line3, line4, phoneAddress, socialAddress);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PostalAddress {\n");
+    sb.append("class ReadContactPointsDataContactPointInner {\n");
     sb.append("    contactId: ").append(toIndentedString(contactId)).append("\n");
     sb.append("    contactType: ").append(toIndentedString(contactType)).append("\n");
+    sb.append("    electronicAddress: ").append(toIndentedString(electronicAddress)).append("\n");
     sb.append("    line1: ").append(toIndentedString(line1)).append("\n");
     sb.append("    line2: ").append(toIndentedString(line2)).append("\n");
     sb.append("    line3: ").append(toIndentedString(line3)).append("\n");
     sb.append("    line4: ").append(toIndentedString(line4)).append("\n");
+    sb.append("    phoneAddress: ").append(toIndentedString(phoneAddress)).append("\n");
+    sb.append("    socialAddress: ").append(toIndentedString(socialAddress)).append("\n");
     sb.append("}");
     return sb.toString();
   }

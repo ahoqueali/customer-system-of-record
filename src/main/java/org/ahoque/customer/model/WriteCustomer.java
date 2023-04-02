@@ -1,21 +1,29 @@
 package org.ahoque.customer.model;
 
+import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import org.ahoque.customer.model.WriteCustomerData;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
 import javax.validation.Valid;
+import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * WriteCustomer
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class WriteCustomer {
 
-public class WriteCustomer   {
   @JsonProperty("Data")
-  private WriteCustomerData data = null;
+  private WriteCustomerData data;
 
   public WriteCustomer data(WriteCustomerData data) {
     this.data = data;
@@ -25,18 +33,16 @@ public class WriteCustomer   {
   /**
    * Get data
    * @return data
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public WriteCustomerData getData() {
+  */
+  @Valid 
+  @Schema(name = "Data", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public WriteCustomerData getData() {
     return data;
   }
 
   public void setData(WriteCustomerData data) {
     this.data = data;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -59,7 +65,6 @@ public class WriteCustomer   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class WriteCustomer {\n");
-    
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -76,3 +81,4 @@ public class WriteCustomer   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

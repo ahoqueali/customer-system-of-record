@@ -1,29 +1,35 @@
 package org.ahoque.customer.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import java.net.URI;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-
-import javax.validation.Valid;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
+import org.ahoque.customer.model.Role;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * Relationship
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class Relationship {
 
-public class Relationship   {
   @JsonProperty("RelationshipId")
-  private UUID relationshipId = null;
+  private UUID relationshipId;
 
   /**
    * Gets or Sets relationshipType
@@ -39,30 +45,37 @@ public class Relationship   {
       this.value = value;
     }
 
-    @Override
     @JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
     public String toString() {
       return String.valueOf(value);
     }
 
     @JsonCreator
-    public static RelationshipTypeEnum fromValue(String text) {
+    public static RelationshipTypeEnum fromValue(String value) {
       for (RelationshipTypeEnum b : RelationshipTypeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
+        if (b.value.equals(value)) {
           return b;
         }
       }
-      return null;
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
   }
+
   @JsonProperty("RelationshipType")
-  private RelationshipTypeEnum relationshipType = null;
+  private RelationshipTypeEnum relationshipType;
 
   @JsonProperty("StartDate")
-  private LocalDate startDate = null;
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+  private LocalDate startDate;
 
   @JsonProperty("EndDate")
-  private LocalDate endDate = null;
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+  private LocalDate endDate;
 
   @JsonProperty("Role")
   @Valid
@@ -76,11 +89,10 @@ public class Relationship   {
   /**
    * Get relationshipId
    * @return relationshipId
-   **/
-  @Schema(description = "")
-  
-    @Valid
-  @Size(min=36,max=36)   public UUID getRelationshipId() {
+  */
+  @Valid @Size(min = 36, max = 36) 
+  @Schema(name = "RelationshipId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public UUID getRelationshipId() {
     return relationshipId;
   }
 
@@ -96,10 +108,10 @@ public class Relationship   {
   /**
    * Get relationshipType
    * @return relationshipType
-   **/
-  @Schema(description = "")
+  */
   
-    public RelationshipTypeEnum getRelationshipType() {
+  @Schema(name = "RelationshipType", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public RelationshipTypeEnum getRelationshipType() {
     return relationshipType;
   }
 
@@ -115,11 +127,10 @@ public class Relationship   {
   /**
    * Get startDate
    * @return startDate
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public LocalDate getStartDate() {
+  */
+  @Valid 
+  @Schema(name = "StartDate", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public LocalDate getStartDate() {
     return startDate;
   }
 
@@ -135,11 +146,10 @@ public class Relationship   {
   /**
    * Get endDate
    * @return endDate
-   **/
-  @Schema(description = "")
-  
-    @Valid
-    public LocalDate getEndDate() {
+  */
+  @Valid 
+  @Schema(name = "EndDate", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public LocalDate getEndDate() {
     return endDate;
   }
 
@@ -154,7 +164,7 @@ public class Relationship   {
 
   public Relationship addRoleItem(Role roleItem) {
     if (this.role == null) {
-      this.role = new ArrayList<Role>();
+      this.role = new ArrayList<>();
     }
     this.role.add(roleItem);
     return this;
@@ -163,17 +173,16 @@ public class Relationship   {
   /**
    * Get role
    * @return role
-   **/
-  @Schema(description = "")
-      @Valid
-    public List<Role> getRole() {
+  */
+  @Valid 
+  @Schema(name = "Role", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public List<Role> getRole() {
     return role;
   }
 
   public void setRole(List<Role> role) {
     this.role = role;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -200,7 +209,6 @@ public class Relationship   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Relationship {\n");
-    
     sb.append("    relationshipId: ").append(toIndentedString(relationshipId)).append("\n");
     sb.append("    relationshipType: ").append(toIndentedString(relationshipType)).append("\n");
     sb.append("    startDate: ").append(toIndentedString(startDate)).append("\n");
@@ -221,3 +229,4 @@ public class Relationship   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

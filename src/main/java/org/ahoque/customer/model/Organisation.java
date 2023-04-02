@@ -1,21 +1,36 @@
 package org.ahoque.customer.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-
+import java.net.URI;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.UUID;
+import org.ahoque.customer.model.Customer;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * Organisation
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
 
-public class Organisation extends Customer implements OneOfReadCustomerDataCustomer, AnyOfReadCustomersDataCustomerItems, OneOfWriteCustomerDataCustomer {
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class Organisation extends Customer implements WriteCustomerDataCustomer {
+
   @JsonProperty("Name")
-  private String name = null;
+  private String name;
 
   public Organisation name(String name) {
     this.name = name;
@@ -25,10 +40,10 @@ public class Organisation extends Customer implements OneOfReadCustomerDataCusto
   /**
    * Get name
    * @return name
-   **/
-  @Schema(example = "Wheal Leisure", description = "")
+  */
   
-    public String getName() {
+  @Schema(name = "Name", example = "Wheal Leisure", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public String getName() {
     return name;
   }
 
@@ -36,6 +51,15 @@ public class Organisation extends Customer implements OneOfReadCustomerDataCusto
     this.name = name;
   }
 
+  public Organisation customerId(UUID customerId) {
+    super.setCustomerId(customerId);
+    return this;
+  }
+
+  public Organisation customerType(CustomerTypeEnum customerType) {
+    super.setCustomerType(customerType);
+    return this;
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -76,3 +100,4 @@ public class Organisation extends Customer implements OneOfReadCustomerDataCusto
     return o.toString().replace("\n", "\n    ");
   }
 }
+

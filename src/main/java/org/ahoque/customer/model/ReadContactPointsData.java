@@ -1,34 +1,43 @@
 package org.ahoque.customer.model;
 
+import java.net.URI;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.validation.annotation.Validated;
-
-import javax.validation.Valid;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import org.ahoque.customer.model.ReadContactPointsDataContactPointInner;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * ReadContactPointsData
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
+@JsonTypeName("ReadContactPoints_Data")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class ReadContactPointsData {
 
-public class ReadContactPointsData   {
   @JsonProperty("ContactPoint")
   @Valid
-  private List<AnyOfReadContactPointsDataContactPointItems> contactPoint = null;
+  private List<ReadContactPointsDataContactPointInner> contactPoint = null;
 
-  public ReadContactPointsData contactPoint(List<AnyOfReadContactPointsDataContactPointItems> contactPoint) {
+  public ReadContactPointsData contactPoint(List<ReadContactPointsDataContactPointInner> contactPoint) {
     this.contactPoint = contactPoint;
     return this;
   }
 
-  public ReadContactPointsData addContactPointItem(AnyOfReadContactPointsDataContactPointItems contactPointItem) {
+  public ReadContactPointsData addContactPointItem(ReadContactPointsDataContactPointInner contactPointItem) {
     if (this.contactPoint == null) {
-      this.contactPoint = new ArrayList<AnyOfReadContactPointsDataContactPointItems>();
+      this.contactPoint = new ArrayList<>();
     }
     this.contactPoint.add(contactPointItem);
     return this;
@@ -37,17 +46,16 @@ public class ReadContactPointsData   {
   /**
    * Get contactPoint
    * @return contactPoint
-   **/
-  @Schema(description = "")
-  
-    public List<AnyOfReadContactPointsDataContactPointItems> getContactPoint() {
+  */
+  @Valid 
+  @Schema(name = "ContactPoint", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public List<ReadContactPointsDataContactPointInner> getContactPoint() {
     return contactPoint;
   }
 
-  public void setContactPoint(List<AnyOfReadContactPointsDataContactPointItems> contactPoint) {
+  public void setContactPoint(List<ReadContactPointsDataContactPointInner> contactPoint) {
     this.contactPoint = contactPoint;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -70,7 +78,6 @@ public class ReadContactPointsData   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ReadContactPointsData {\n");
-    
     sb.append("    contactPoint: ").append(toIndentedString(contactPoint)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -87,3 +94,4 @@ public class ReadContactPointsData   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

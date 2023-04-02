@@ -1,25 +1,30 @@
 package org.ahoque.customer.model;
 
+import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.UUID;
-import org.springframework.validation.annotation.Validated;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+
+import java.util.*;
+import javax.annotation.Generated;
 
 /**
  * ContactPoint
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-03-11T20:44:13.669625822Z[GMT]")
 
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
+public class ContactPoint {
 
-public class ContactPoint   {
   @JsonProperty("ContactId")
-  private UUID contactId = null;
+  private UUID contactId;
 
   /**
    * Gets or Sets contactType
@@ -39,24 +44,29 @@ public class ContactPoint   {
       this.value = value;
     }
 
-    @Override
     @JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
     public String toString() {
       return String.valueOf(value);
     }
 
     @JsonCreator
-    public static ContactTypeEnum fromValue(String text) {
+    public static ContactTypeEnum fromValue(String value) {
       for (ContactTypeEnum b : ContactTypeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
+        if (b.value.equals(value)) {
           return b;
         }
       }
-      return null;
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
   }
+
   @JsonProperty("ContactType")
-  private ContactTypeEnum contactType = null;
+  private ContactTypeEnum contactType;
 
   public ContactPoint contactId(UUID contactId) {
     this.contactId = contactId;
@@ -66,11 +76,10 @@ public class ContactPoint   {
   /**
    * Get contactId
    * @return contactId
-   **/
-  @Schema(description = "")
-  
-    @Valid
-  @Size(min=36,max=36)   public UUID getContactId() {
+  */
+  @Valid @Size(min = 36, max = 36) 
+  @Schema(name = "ContactId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  public UUID getContactId() {
     return contactId;
   }
 
@@ -86,18 +95,16 @@ public class ContactPoint   {
   /**
    * Get contactType
    * @return contactType
-   **/
-  @Schema(required = true, description = "")
-      @NotNull
-
-    public ContactTypeEnum getContactType() {
+  */
+  @NotNull 
+  @Schema(name = "ContactType", requiredMode = Schema.RequiredMode.REQUIRED)
+  public ContactTypeEnum getContactType() {
     return contactType;
   }
 
   public void setContactType(ContactTypeEnum contactType) {
     this.contactType = contactType;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -121,7 +128,6 @@ public class ContactPoint   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ContactPoint {\n");
-    
     sb.append("    contactId: ").append(toIndentedString(contactId)).append("\n");
     sb.append("    contactType: ").append(toIndentedString(contactType)).append("\n");
     sb.append("}");
@@ -139,3 +145,4 @@ public class ContactPoint   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

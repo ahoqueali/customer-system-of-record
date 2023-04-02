@@ -2,15 +2,10 @@ package org.ahoque.customer.model;
 
 import java.net.URI;
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.UUID;
-import org.ahoque.customer.model.Role;
-import org.ahoque.customer.model.RoleType;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -22,12 +17,12 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * CustomerRelationshipInvolvement
+ * CustomerRelationshipInvolvementAllOf
  */
 
-
+@JsonTypeName("CustomerRelationshipInvolvement_allOf")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
-public class CustomerRelationshipInvolvement extends Role {
+public class CustomerRelationshipInvolvementAllOf {
 
   /**
    * Gets or Sets customerRelationshipInvolvementType
@@ -69,7 +64,7 @@ public class CustomerRelationshipInvolvement extends Role {
   @JsonProperty("CustomerRelationshipInvolvementType")
   private CustomerRelationshipInvolvementTypeEnum customerRelationshipInvolvementType;
 
-  public CustomerRelationshipInvolvement customerRelationshipInvolvementType(CustomerRelationshipInvolvementTypeEnum customerRelationshipInvolvementType) {
+  public CustomerRelationshipInvolvementAllOf customerRelationshipInvolvementType(CustomerRelationshipInvolvementTypeEnum customerRelationshipInvolvementType) {
     this.customerRelationshipInvolvementType = customerRelationshipInvolvementType;
     return this;
   }
@@ -88,26 +83,6 @@ public class CustomerRelationshipInvolvement extends Role {
     this.customerRelationshipInvolvementType = customerRelationshipInvolvementType;
   }
 
-  public CustomerRelationshipInvolvement roleId(UUID roleId) {
-    super.setRoleId(roleId);
-    return this;
-  }
-
-  public CustomerRelationshipInvolvement roleType(RoleType roleType) {
-    super.setRoleType(roleType);
-    return this;
-  }
-
-  public CustomerRelationshipInvolvement roleName(String roleName) {
-    super.setRoleName(roleName);
-    return this;
-  }
-
-  public CustomerRelationshipInvolvement relationshipId(UUID relationshipId) {
-    super.setRelationshipId(relationshipId);
-    return this;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -116,21 +91,19 @@ public class CustomerRelationshipInvolvement extends Role {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CustomerRelationshipInvolvement customerRelationshipInvolvement = (CustomerRelationshipInvolvement) o;
-    return Objects.equals(this.customerRelationshipInvolvementType, customerRelationshipInvolvement.customerRelationshipInvolvementType) &&
-        super.equals(o);
+    CustomerRelationshipInvolvementAllOf customerRelationshipInvolvementAllOf = (CustomerRelationshipInvolvementAllOf) o;
+    return Objects.equals(this.customerRelationshipInvolvementType, customerRelationshipInvolvementAllOf.customerRelationshipInvolvementType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(customerRelationshipInvolvementType, super.hashCode());
+    return Objects.hash(customerRelationshipInvolvementType);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CustomerRelationshipInvolvement {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("class CustomerRelationshipInvolvementAllOf {\n");
     sb.append("    customerRelationshipInvolvementType: ").append(toIndentedString(customerRelationshipInvolvementType)).append("\n");
     sb.append("}");
     return sb.toString();

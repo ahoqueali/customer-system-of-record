@@ -17,23 +17,19 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets LocationTypeValues
+ * Gets or Sets RoleType
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-04-02T07:15:10.777765+01:00[Europe/London]")
-public enum LocationTypeValues {
+public enum RoleType {
   
-  RESIDENCY("RESIDENCY"),
+  CUSTOMER_RELATIONSHIP_INVOLVEMENT("CUSTOMER_RELATIONSHIP_INVOLVEMENT"),
   
-  DOMICILE("DOMICILE"),
-  
-  CURRENT_LOCATION("CURRENT_LOCATION"),
-  
-  PREVIOUS_LOCATION("PREVIOUS_LOCATION");
+  AGREEMENT_INVOLVEMENT("AGREEMENT_INVOLVEMENT");
 
   private String value;
 
-  LocationTypeValues(String value) {
+  RoleType(String value) {
     this.value = value;
   }
 
@@ -48,8 +44,8 @@ public enum LocationTypeValues {
   }
 
   @JsonCreator
-  public static LocationTypeValues fromValue(String value) {
-    for (LocationTypeValues b : LocationTypeValues.values()) {
+  public static RoleType fromValue(String value) {
+    for (RoleType b : RoleType.values()) {
       if (b.value.equals(value)) {
         return b;
       }
