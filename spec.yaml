@@ -210,8 +210,6 @@ components:
               oneOf:
                 - $ref: "#/components/schemas/Person"
                 - $ref: "#/components/schemas/Organisation"
-          discriminator:
-            propertyName: CustomerType
 
     ReadCustomers:
       type: object
@@ -234,8 +232,6 @@ components:
         CustomerId:
           type: string
           format: uuid
-          minLength: 36
-          maxLength: 36
           readOnly: true
         CustomerType:
           type: string
@@ -255,6 +251,7 @@ components:
               type: string
               enum:
                 - PERSON
+              default: PERSON
 
     Organisation:
       allOf:
@@ -268,6 +265,7 @@ components:
               type: string
               enum:
                 - ORGANISATION
+              default: ORGANISATION
 
     ReadCustomerLocations:
       type: object
