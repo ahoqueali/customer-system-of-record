@@ -120,7 +120,7 @@ paths:
     get:
       tags:
         - Customer
-      operationId: getContactPoints
+      operationId: getContacts
       parameters:
         - name: CustomerId
           in: path
@@ -135,7 +135,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReadContactPoints'
+                $ref: '#/components/schemas/ReadContacts'
 
   '/customers/{CustomerId}/roles':
     get:
@@ -277,30 +277,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/CustomerLocation'
-          example:
-            Data:
-              CustomerLocation:
-                - CustomerLocationid: ad6d61f3-e286-45de-8875-a3cd34752b04
-                  LocationRole: DOMICILE
-                  LocationType: CURRENT_LOCATION
-                  Location:
-                    LocationId: f4e7177f-11ec-4de7-a268-c0bb63f5071e
-                    LocationType: LOCATION_POSTAL_ADDRESS
-                    Line1: string
-                    Line2: string
-                    Line3: string
-                    Line4: string
-                - CustomerLocationid: 9aeeedb1-cd6c-494c-8441-78e59b4b9a31
-                  LocationRole: DOMICILE
-                  LocationType: PREVIOUS_LOCATION
-                  Location:
-                    LocationId: 52d9fd9f-39aa-4e9f-8113-1309b01de942
-                    LocationType: LOCATION_POSTAL_ADDRESS
-                    Line1: string
-                    Line2: string
-                    Line3: string
-                    Line4: string
-
 
     CustomerLocation:
       type: object
@@ -332,13 +308,13 @@ components:
         - CURRENT_LOCATION
         - PREVIOUS_LOCATION
 
-    ReadContactPoints:
+    ReadContacts:
       type: object
       properties:
         Data:
           type: object
           properties:
-            ContactPoint:
+            Contact:
               type: array
               items:
                 anyOf:
@@ -346,25 +322,6 @@ components:
                   - $ref: '#/components/schemas/PostalAddress'
                   - $ref: '#/components/schemas/PhoneAddress'
                   - $ref: '#/components/schemas/SocialAddress'
-          example:
-            Data:
-              ContactPoint:
-                - ContactId: 66d5e3d3-f8cb-4a05-a151-c7e40e14cedf
-                  ContactType: ELECTRONIC_ADDRESS
-                  ElectronicAddress: ross.poldark@gmail.com
-                - ContactId: ca25016c-a985-480f-be92-816fa061272e
-                  ContactType: POSTAL_ADDRESS
-                  Line1: string
-                  Line2: string
-                  Line3: string
-                  Line4: string
-                - ContactId: c706fdcc-aed2-43e9-b617-59cfe78a82a9
-                  ContactType: PHONE_ADDRESS
-                  PhoneAddress: '694234332434'
-                - ContactId: 29073fc2-9588-4e9f-b82d-4db170d62b10
-                  ContactType: SOCIAL_ADDRESS
-                  SocialAddress: '@rosspoldark'
-
 
     ReadRoles:
       type: object
@@ -390,7 +347,7 @@ components:
               items:
                 $ref: '#/components/schemas/Relationship'
 
-    ContactPoint:
+    Contact:
       type: object
       required:
         - ContactType
@@ -407,7 +364,7 @@ components:
 
     ElectronicAddress:
       allOf:
-        - $ref: "#/components/schemas/ContactPoint"
+        - $ref: "#/components/schemas/Contact"
         - type: object
           properties:
             ElectronicAddress:
@@ -475,7 +432,7 @@ components:
 
     PostalAddress:
       allOf:
-        - $ref: "#/components/schemas/ContactPoint"
+        - $ref: "#/components/schemas/Contact"
         - $ref: "#/components/schemas/Address"
 
     Address:
@@ -492,7 +449,7 @@ components:
 
     PhoneAddress:
       allOf:
-        - $ref: "#/components/schemas/ContactPoint"
+        - $ref: "#/components/schemas/Contact"
         - type: object
           properties:
             PhoneAddress:
@@ -501,7 +458,7 @@ components:
 
     SocialAddress:
       allOf:
-        - $ref: "#/components/schemas/ContactPoint"
+        - $ref: "#/components/schemas/Contact"
         - type: object
           properties:
             SocialAddress:
