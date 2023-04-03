@@ -1,0 +1,519 @@
+openapi: 3.0.2
+info:
+  title: Customer System of Record - OpenAPI 3.0
+  version: 1.0.5
+servers:
+  - url: localhost:8080/customer-service/v1
+tags:
+  - name: Customer
+paths:
+  '/customers':
+    post:
+      tags:
+        - Customer
+      operationId: createCustomer
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WriteCustomer'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadCustomer'
+        '405':
+          description: Invalid input
+
+    get:
+      tags:
+        - Customer
+      description: ''
+      operationId: getCustomers
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadCustomers'
+
+  '/customers/{CustomerId}':
+    get:
+      tags:
+        - Customer
+      operationId: getCustomer
+      parameters:
+        - name: CustomerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/Uuid"
+          example:
+            3fa85f64-5717-4562-b3fc-2c963f66afa6
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadCustomer'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Customer not found
+
+    patch:
+      tags:
+        - Customer
+      description: Update customer
+      operationId: updateCustomer
+      parameters:
+        - name: CustomerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/Uuid"
+          example:
+            3fa85f64-5717-4562-b3fc-2c963f66afa6
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WriteCustomer'
+        required: true
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadCustomer'
+        '405':
+          description: Invalid input
+
+  '/customers/{CustomerId}/locations':
+    get:
+      tags:
+        - Customer
+      operationId: getCustomerLocations
+      parameters:
+        - name: CustomerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/Uuid"
+          example:
+            3fa85f64-5717-4562-b3fc-2c963f66afa6
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadCustomerLocations'
+
+  '/customers/{CustomerId}/contacts':
+    get:
+      tags:
+        - Customer
+      operationId: getContacts
+      parameters:
+        - name: CustomerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/Uuid"
+          example:
+            3fa85f64-5717-4562-b3fc-2c963f66afa6
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadContacts'
+
+  '/customers/{CustomerId}/roles':
+    get:
+      tags:
+        - Customer
+      operationId: getRole
+      parameters:
+        - name: CustomerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/Uuid"
+          example:
+            3fa85f64-5717-4562-b3fc-2c963f66afa6
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadRoles'
+
+  '/customers/{CustomerId}/relationships':
+    get:
+      tags:
+        - Customer
+      operationId: getReleationship
+      parameters:
+        - name: CustomerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/Uuid"
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadRelationship'
+
+components:
+  schemas:
+
+    Uuid:
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+
+    WriteCustomer:
+      type: object
+      properties:
+        Data:
+          type: object
+          properties:
+            Customer:
+              oneOf:
+                - $ref: "#/components/schemas/Person"
+                - $ref: "#/components/schemas/Organisation"
+              discriminator:
+                propertyName: CustomerType
+
+    ReadCustomer:
+      type: object
+      properties:
+        Data:
+          type: object
+          properties:
+            Customer:
+              oneOf:
+                - $ref: "#/components/schemas/Person"
+                - $ref: "#/components/schemas/Organisation"
+              discriminator:
+                propertyName: CustomerType
+
+    ReadCustomers:
+      type: object
+      properties:
+        Data:
+          type: object
+          properties:
+            Customer:
+              type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/Person'
+                  - $ref: '#/components/schemas/Organisation'
+                discriminator:
+                  propertyName: CustomerType
+
+    Customer:
+      type: object
+      required:
+        - CustomerType
+      properties:
+        CustomerId:
+          type: string
+          format: uuid
+          readOnly: true
+        CustomerType:
+          type: string
+
+    Person:
+      allOf:
+        - $ref: "#/components/schemas/Customer"
+        - type: object
+          properties:
+            FirstName:
+              type: string
+              example: Ross Poldark
+
+    Organisation:
+      allOf:
+        - $ref: "#/components/schemas/Customer"
+        - type: object
+          properties:
+            Name:
+              type: string
+              example: Wheal Leisure
+
+    ReadCustomerLocations:
+      type: object
+      properties:
+        Data:
+          type: object
+          properties:
+            CustomerLocation:
+              type: array
+              items:
+                $ref: '#/components/schemas/CustomerLocation'
+
+    CustomerLocation:
+      type: object
+      properties:
+        CustomerLocationid:
+          $ref: '#/components/schemas/Uuid'
+        LocationRole:
+          $ref: '#/components/schemas/LocationRoleTypeValues'
+        LocationType:
+          $ref: '#/components/schemas/LocationTypeValues'
+        Location:
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/LocationPostalAddress'
+            - $ref: '#/components/schemas/GeolocationAddress'
+            - $ref: '#/components/schemas/LatitudeAddress'
+            - $ref: '#/components/schemas/LongitudeAddress'
+            - $ref: '#/components/schemas/LocationElectronicAddress'
+
+    LocationRoleTypeValues:
+      enum:
+        - DOMICILE
+        - CORRESPONDENCE
+
+    LocationTypeValues:
+      enum:
+        - RESIDENCY
+        - DOMICILE
+        - CURRENT_LOCATION
+        - PREVIOUS_LOCATION
+
+    ReadContacts:
+      type: object
+      properties:
+        Data:
+          type: object
+          properties:
+            Contact:
+              type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/ElectronicAddress'
+                  - $ref: '#/components/schemas/PostalAddress'
+                  - $ref: '#/components/schemas/PhoneAddress'
+                  - $ref: '#/components/schemas/SocialAddress'
+
+    ReadRoles:
+      type: object
+      properties:
+        Data:
+          type: object
+          properties:
+            Role:
+              type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/AggrementInvolvement'
+                  - $ref: '#/components/schemas/CustomerRelationshipInvolvement'
+
+    ReadRelationship:
+      type: object
+      properties:
+        Data:
+          type: object
+          properties:
+            Relationship:
+              type: array
+              items:
+                $ref: '#/components/schemas/Relationship'
+
+    Contact:
+      type: object
+      required:
+        - ContactType
+      properties:
+        ContactId:
+          $ref: '#/components/schemas/Uuid'
+        ContactType:
+          type: string
+          enum:
+            - ELECTRONIC_ADDRESS
+            - POSTAL_ADDRESS
+            - PHONE_ADDRESS
+            - SOCIAL_ADDRESS
+
+    ElectronicAddress:
+      allOf:
+        - $ref: "#/components/schemas/Contact"
+        - type: object
+          properties:
+            ElectronicAddress:
+              type: string
+              example: ross.poldark@gmail.com
+
+
+    LocationAddress:
+      type: object
+      required:
+        - LocationAddressType
+      properties:
+        LocationId:
+          $ref: '#/components/schemas/Uuid'
+        LocationType:
+          type: string
+          enum:
+            - LOCATION_ELECTRONIC_ADDRESS
+            - LOCATION_POSTAL_ADDRESS
+            - GEOLOCATION_ADDRESS
+            - LATITUDE_ADDRESS
+            - LONGITUDE_ADDRESS
+
+    LocationElectronicAddress:
+      allOf:
+        - $ref: "#/components/schemas/LocationAddress"
+        - type: object
+          properties:
+            ElectronicAddress:
+              type: string
+              example: ross.poldark@gmail.com
+
+    LocationPostalAddress:
+      allOf:
+        - $ref: "#/components/schemas/LocationAddress"
+        - $ref: "#/components/schemas/Address"
+
+    GeolocationAddress:
+      allOf:
+        - $ref: "#/components/schemas/LocationAddress"
+        - type: object
+          properties:
+            Geolocation:
+              type: string
+              example: some geolocation
+
+    LatitudeAddress:
+      allOf:
+        - $ref: "#/components/schemas/LocationAddress"
+        - type: object
+          properties:
+            LatitudeAddress:
+              type: string
+              example: some latitude address
+
+    LongitudeAddress:
+      allOf:
+        - $ref: "#/components/schemas/LocationAddress"
+        - type: object
+          properties:
+            LongitudeAddress:
+              type: string
+              example: some longitude address
+
+
+    PostalAddress:
+      allOf:
+        - $ref: "#/components/schemas/Contact"
+        - $ref: "#/components/schemas/Address"
+
+    Address:
+      type: object
+      properties:
+        Line1:
+          type: string
+        Line2:
+          type: string
+        Line3:
+          type: string
+        Line4:
+          type: string
+
+    PhoneAddress:
+      allOf:
+        - $ref: "#/components/schemas/Contact"
+        - type: object
+          properties:
+            PhoneAddress:
+              type: string
+              example: 0694234332434
+
+    SocialAddress:
+      allOf:
+        - $ref: "#/components/schemas/Contact"
+        - type: object
+          properties:
+            SocialAddress:
+              type: string
+              example: '@rosspoldark'
+
+    Relationship:
+      type: object
+      required:
+        - ReleationshipType
+      properties:
+        RelationshipId:
+          $ref: '#/components/schemas/Uuid'
+        RelationshipType:
+          type: string
+          enum:
+            - MARRIAGE
+            - PARENT
+        StartDate:
+          type: string
+          format: date
+        EndDate:
+          type: string
+          format: date
+        Role:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+
+    Role:
+      type: object
+      required:
+        - RoleType
+      properties:
+        RoleId:
+          $ref: '#/components/schemas/Uuid'
+        RoleType:
+          $ref: '#/components/schemas/RoleType'
+        RoleName:
+          type: string
+
+        RelationshipId:
+          $ref: '#/components/schemas/Uuid'
+      discriminator:
+        propertyName: RoleType
+
+    CustomerRelationshipInvolvement:
+      allOf:
+        - $ref: "#/components/schemas/Role"
+        - type: object
+          properties:
+            CustomerRelationshipInvolvementType:
+              enum:
+                - CUSTOMER_EMPLOYEE
+                - SUPPLIER_BANK_EMPLOYER
+                - RELATIONSHIP_MANAGER
+
+    RoleType:
+      type: string
+      enum:
+        - CUSTOMER_RELATIONSHIP_INVOLVEMENT
+        - AGREEMENT_INVOLVEMENT
+
+    AggrementInvolvement:
+      allOf:
+        - $ref: "#/components/schemas/Role"
+
