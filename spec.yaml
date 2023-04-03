@@ -3,7 +3,7 @@ info:
   title: Customer System of Record - OpenAPI 3.0
   version: 1.0.5
 servers:
-  - url: /api/v1.0
+  - url: localhost:8080/customer-service/v1
 tags:
   - name: Customer
 paths:
@@ -197,11 +197,8 @@ components:
               oneOf:
                 - $ref: "#/components/schemas/Person"
                 - $ref: "#/components/schemas/Organisation"
-          example:
-            Data:
-              Customer:
-                CustomerType: PERSON
-                FirstName: Ross Poldark
+          discriminator:
+            propertyName: CustomerType
 
     ReadCustomer:
       type: object
@@ -213,12 +210,6 @@ components:
               oneOf:
                 - $ref: "#/components/schemas/Person"
                 - $ref: "#/components/schemas/Organisation"
-          example:
-            Data:
-              Customer:
-                CustomerId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-                CustomerType: PERSON
-                FirstName: Ross Poldark
 
     ReadCustomers:
       type: object
@@ -232,15 +223,6 @@ components:
                 anyOf:
                   - $ref: '#/components/schemas/Person'
                   - $ref: '#/components/schemas/Organisation'
-      example:
-        Data:
-          Customer:
-            - CustomerId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-              CustomerType: PERSON
-              FirstName: Ross Poldark
-            - CustomerId: c0af5c6a-4c9b-4878-b4a5-527db1bf6fb8
-              CustomerType: ORGANISATION
-              Name: Wheal Leisure
 
     Customer:
       type: object
@@ -250,17 +232,12 @@ components:
         CustomerId:
           type: string
           format: uuid
-          minLength: 36
-          maxLength: 36
           readOnly: true
         CustomerType:
           type: string
           enum:
             - PERSON
             - ORGANISATION
-          example: string
-      discriminator:
-        propertyName: CustomerType
 
     Person:
       allOf:
@@ -270,6 +247,11 @@ components:
             FirstName:
               type: string
               example: Ross Poldark
+            CustomerType:
+              type: string
+              enum:
+                - PERSON
+              default: PERSON
 
     Organisation:
       allOf:
@@ -279,6 +261,11 @@ components:
             Name:
               type: string
               example: Wheal Leisure
+            CustomerType:
+              type: string
+              enum:
+                - ORGANISATION
+              default: ORGANISATION
 
     ReadCustomerLocations:
       type: object
