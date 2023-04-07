@@ -26,6 +26,24 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>4.4.3</version>
+                <configuration>
+                    <changeLogFile>src/main/database/master-changelog.sql</changeLogFile>
+                    <url>jdbc:postgresql://localhost:26257/defaultdb?sslmode=disable</url>
+                    <username>root</username>
+                    <password></password>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>42.3.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
