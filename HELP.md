@@ -6,6 +6,11 @@ Install open api and run below command
 openapi-generator generate -i csor-spec.yaml -g spring -o .
 ```
 
+* How to create table schema
+```bash
+openapi-generator generate -g mysql-schema -o out -i csor-spec.yaml --additional-properties=identifierNamingConvention=snake_case
+```
+
 * How to setup cockroach db and create database
 ```bash
 brew install cockroachdb/tap/cockroach
