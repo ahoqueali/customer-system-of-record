@@ -1,8 +1,8 @@
 package org.openapitools.configuration;
 
-import org.openapitools.model.LocationRoleTypeValues;
-import org.openapitools.model.LocationTypeValues;
-import org.openapitools.model.RoleType;
+import org.ahoque.customer.model.LocationRoleTypeValues;
+import org.ahoque.customer.model.LocationTypeValues;
+import org.ahoque.customer.model.RoleType;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
