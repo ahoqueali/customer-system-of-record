@@ -3,7 +3,7 @@
 * How to generate domain code using openapi spec
 Install open api and run below command
 ```bash
-openapi-generator generate -i csor-spec.yaml -g spring -o .
+openapi-generator generate -i csor-spec.yaml --model-package org.ahoque.customer.model --api-package org.ahoque.customer.controller -g spring -o .
 ```
 
 * How to create table schema
