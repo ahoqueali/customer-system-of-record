@@ -52,8 +52,6 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/Uuid"
-          example:
-            3fa85f64-5717-4562-b3fc-2c963f66afa6
       responses:
         '200':
           description: successful operation
@@ -77,8 +75,6 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/Uuid"
-          example:
-            3fa85f64-5717-4562-b3fc-2c963f66afa6
       requestBody:
         content:
           application/json:
@@ -99,22 +95,20 @@ paths:
     get:
       tags:
         - Customer
-      operationId: getCustomerLocations
+      operationId: getLocations
       parameters:
         - name: CustomerId
           in: path
           required: true
           schema:
             $ref: "#/components/schemas/Uuid"
-          example:
-            3fa85f64-5717-4562-b3fc-2c963f66afa6
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReadCustomerLocations'
+                $ref: '#/components/schemas/ReadLocations'
 
   '/customers/{CustomerId}/contacts':
     get:
@@ -127,8 +121,6 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/Uuid"
-          example:
-            3fa85f64-5717-4562-b3fc-2c963f66afa6
       responses:
         '200':
           description: successful operation
@@ -148,8 +140,6 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/Uuid"
-          example:
-            3fa85f64-5717-4562-b3fc-2c963f66afa6
       responses:
         '200':
           description: successful operation
@@ -169,7 +159,6 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/Uuid"
-          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
       responses:
         '200':
           description: successful operation
@@ -184,8 +173,7 @@ components:
     Uuid:
       type: string
       format: uuid
-      minLength: 36
-      maxLength: 36
+      example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
 
     WriteCustomer:
       type: object
@@ -237,8 +225,7 @@ components:
           type: string
           format: uuid
           readOnly: true
-        CustomerType:
-          type: string
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
 
     Person:
       allOf:
@@ -248,6 +235,9 @@ components:
             FirstName:
               type: string
               example: Ross Poldark
+            CustomerType:
+              type: string
+              example: Person
 
     Organisation:
       allOf:
@@ -257,22 +247,25 @@ components:
             Name:
               type: string
               example: Wheal Leisure
+            CustomerType:
+              type: string
+              example: Organisation
 
-    ReadCustomerLocations:
+    ReadLocations:
       type: object
       properties:
         Data:
           type: object
           properties:
-            CustomerLocation:
+            Location:
               type: array
               items:
-                $ref: '#/components/schemas/CustomerLocation'
+                $ref: '#/components/schemas/Location'
 
-    CustomerLocation:
+    Location:
       type: object
       properties:
-        CustomerLocationid:
+        Locationid:
           $ref: '#/components/schemas/Uuid'
         LocationRole:
           $ref: '#/components/schemas/LocationRoleTypeValues'
