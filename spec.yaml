@@ -3,7 +3,7 @@ info:
   title: Customer System of Record - OpenAPI 3.0
   version: 1.0.5
 servers:
-  - url: localhost:8080/customer-service/v1
+  - url: http://localhost:8080/customer-service/v1
 tags:
   - name: Customer
 paths:
@@ -173,6 +173,7 @@ components:
     Uuid:
       type: string
       format: uuid
+      readOnly: true
       example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
 
     WriteCustomer:
@@ -216,40 +217,31 @@ components:
                 discriminator:
                   propertyName: CustomerType
 
-    Customer:
-      type: object
+    Person:
       required:
         - CustomerType
+      type: object
       properties:
-        CustomerId:
+        FirstName:
           type: string
-          format: uuid
-          readOnly: true
-          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-
-    Person:
-      allOf:
-        - $ref: "#/components/schemas/Customer"
-        - type: object
-          properties:
-            FirstName:
-              type: string
-              example: Ross Poldark
-            CustomerType:
-              type: string
-              example: Person
+          example: Ross Poldark
+        CustomerType:
+          type: string
+          example: Person
 
     Organisation:
-      allOf:
-        - $ref: "#/components/schemas/Customer"
-        - type: object
-          properties:
-            Name:
-              type: string
-              example: Wheal Leisure
-            CustomerType:
-              type: string
-              example: Organisation
+      required:
+        - CustomerType
+      type: object
+      properties:
+        CustomerId:
+          $ref: '#/components/schemas/Uuid'
+        Name:
+          type: string
+          example: Wheal Leisure
+        CustomerType:
+          type: string
+          example: Organisation
 
     ReadLocations:
       type: object
