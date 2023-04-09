@@ -260,9 +260,9 @@ components:
             Location:
               type: array
               items:
-                $ref: '#/components/schemas/Location'
+                $ref: '#/components/schemas/CustomerLocation'
 
-    Location:
+    CustomerLocation:
       type: object
       properties:
         Locationid:
@@ -355,7 +355,6 @@ components:
               type: string
               example: ross.poldark@gmail.com
 
-
     LocationAddress:
       type: object
       required:
@@ -412,7 +411,6 @@ components:
             LongitudeAddress:
               type: string
               example: some longitude address
-
 
     PostalAddress:
       allOf:
