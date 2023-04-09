@@ -1,3 +1,5 @@
+# SoR for Personalised Customer Banking Experience
+
 #Data Model
 [BIAN Model v9](https://bian.org/servicelandscape-9-0/views/view_38585.html)
 
