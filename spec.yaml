@@ -114,20 +114,28 @@ paths:
     post:
       tags:
         - Customer
-      operationId: saveContacts
+      operationId: createContactPoint
       parameters:
         - name: CustomerId
           in: path
           required: true
           schema:
             $ref: "#/components/schemas/Uuid"
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WriteContactPoint'
       responses:
-        '200':
-          description: successful operation
+        '201':
+          description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WriteContactPoint'
+                $ref: '#/components/schemas/ReadContactPoint'
+        '405':
+          description: Invalid input
 
     get:
       tags:
@@ -217,8 +225,6 @@ components:
               oneOf:
                 - $ref: "#/components/schemas/Person"
                 - $ref: "#/components/schemas/Organisation"
-              discriminator:
-                propertyName: CustomerType
 
     ReadCustomers:
       type: object
@@ -232,8 +238,6 @@ components:
                 anyOf:
                   - $ref: '#/components/schemas/Person'
                   - $ref: '#/components/schemas/Organisation'
-                discriminator:
-                  propertyName: CustomerType
 
     Person:
       required:
@@ -340,10 +344,24 @@ components:
                   - $ref: '#/components/schemas/ElectronicAddress'
                   - $ref: '#/components/schemas/PostalAddress'
                   - $ref: '#/components/schemas/PhoneAddress'
-                  - $ref: '#/components/schemas/SocialAddress'
+                  - $ref: '#/components/schemas/SocialNetworkAddress'
                 discriminator:
                   propertyName: ContactType
 
+    ReadContactPoint:
+      type: object
+      properties:
+        Data:
+          type: object
+          properties:
+            Contact:
+              type: array
+              items:
+                oneOf:
+                  - $ref: '#/components/schemas/ElectronicAddress'
+                  - $ref: '#/components/schemas/PostalAddress'
+                  - $ref: '#/components/schemas/PhoneAddress'
+                  - $ref: '#/components/schemas/SocialNetworkAddress'
 
     ReadContactPoints:
       type: object
@@ -358,7 +376,7 @@ components:
                   - $ref: '#/components/schemas/ElectronicAddress'
                   - $ref: '#/components/schemas/PostalAddress'
                   - $ref: '#/components/schemas/PhoneAddress'
-                  - $ref: '#/components/schemas/SocialAddress'
+                  - $ref: '#/components/schemas/SocialNetworkAddress'
 
     ElectronicAddress:
       type: object
@@ -410,7 +428,7 @@ components:
           type: string
           example: 0694234332434
 
-    SocialAddress:
+    SocialNetworkAddress:
       type: object
       required:
         - ContactType
