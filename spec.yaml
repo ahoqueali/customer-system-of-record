@@ -92,6 +92,32 @@ paths:
           description: Invalid input
 
   '/customers/{CustomerId}/locations':
+    post:
+      tags:
+        - Customer
+      operationId: createLocation
+      parameters:
+        - name: CustomerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/Uuid"
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WriteLocation'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadLocation'
+        '405':
+          description: Invalid input
+
     get:
       tags:
         - Customer
@@ -265,6 +291,24 @@ components:
           type: string
           example: Organisation
 
+    WriteLocation:
+      type: object
+      properties:
+        Data:
+          type: object
+          properties:
+            CustomerLocation:
+              $ref: '#/components/schemas/CustomerLocation'
+
+    ReadLocation:
+      type: object
+      properties:
+        Data:
+          type: object
+          properties:
+            CustomerLocation:
+              $ref: '#/components/schemas/CustomerLocation'
+
     ReadLocations:
       type: object
       properties:
@@ -276,15 +320,27 @@ components:
               items:
                 $ref: '#/components/schemas/CustomerLocation'
 
+    LocationRoleType:
+      enum:
+        - DOMICILE
+        - CORRESPONDENCE
+
+    LocationType:
+      enum:
+        - RESIDENCY
+        - DOMICILE
+        - CURRENT_LOCATION
+        - PREVIOUS_LOCATION
+
     CustomerLocation:
       type: object
       properties:
         Locationid:
           $ref: '#/components/schemas/Uuid'
         LocationRole:
-          $ref: '#/components/schemas/LocationRoleTypeValues'
+          $ref: '#/components/schemas/LocationRoleType'
         LocationType:
-          $ref: '#/components/schemas/LocationTypeValues'
+          $ref: '#/components/schemas/LocationType'
         Location:
           type: object
           oneOf:
@@ -293,18 +349,68 @@ components:
             - $ref: '#/components/schemas/LatitudeAddress'
             - $ref: '#/components/schemas/LongitudeAddress'
             - $ref: '#/components/schemas/LocationElectronicAddress'
+          discriminator:
+            propertyName: LocationType
 
-    LocationRoleTypeValues:
-      enum:
-        - DOMICILE
-        - CORRESPONDENCE
+    LocationElectronicAddress:
+      required:
+        - LocationType
+      type: object
+      properties:
+        ElectronicAddress:
+          type: string
+          example: ross.poldark@gmail.com
+        LocationType:
+          type: string
+          example: LocationElectronicAddress
 
-    LocationTypeValues:
-      enum:
-        - RESIDENCY
-        - DOMICILE
-        - CURRENT_LOCATION
-        - PREVIOUS_LOCATION
+
+    LocationPostalAddress:
+      allOf:
+        - $ref: "#/components/schemas/Address"
+      required:
+        - LocationType
+      type: object
+      properties:
+        LocationType:
+          type: string
+          example: LocationPostalAddress
+
+    GeolocationAddress:
+      required:
+        - LocationType
+      type: object
+      properties:
+        Geolocation:
+          type: string
+          example: some geolocation
+        LocationType:
+          type: string
+          example: GeolocationAddress
+
+    LatitudeAddress:
+      required:
+        - LocationType
+      type: object
+      properties:
+        LatitudeAddress:
+          type: string
+          example: some latitude address
+        LocationType:
+          type: string
+          example: LatitudeAddress
+
+    LongitudeAddress:
+      required:
+        - LocationType
+      type: object
+      properties:
+        LongitudeAddress:
+          type: string
+          example: some latitude address
+        LocationType:
+          type: string
+          example: LongitudeAddress
 
 
     ReadRoles:
@@ -338,15 +444,13 @@ components:
           type: object
           properties:
             Contact:
-              type: array
-              items:
-                oneOf:
-                  - $ref: '#/components/schemas/ElectronicAddress'
-                  - $ref: '#/components/schemas/PostalAddress'
-                  - $ref: '#/components/schemas/PhoneAddress'
-                  - $ref: '#/components/schemas/SocialNetworkAddress'
-                discriminator:
-                  propertyName: ContactType
+              oneOf:
+                - $ref: '#/components/schemas/ElectronicAddress'
+                - $ref: '#/components/schemas/PostalAddress'
+                - $ref: '#/components/schemas/PhoneAddress'
+                - $ref: '#/components/schemas/SocialNetworkAddress'
+              discriminator:
+                propertyName: ContactType
 
     ReadContactPoint:
       type: object
@@ -355,13 +459,11 @@ components:
           type: object
           properties:
             Contact:
-              type: array
-              items:
-                oneOf:
-                  - $ref: '#/components/schemas/ElectronicAddress'
-                  - $ref: '#/components/schemas/PostalAddress'
-                  - $ref: '#/components/schemas/PhoneAddress'
-                  - $ref: '#/components/schemas/SocialNetworkAddress'
+              oneOf:
+                - $ref: '#/components/schemas/ElectronicAddress'
+                - $ref: '#/components/schemas/PostalAddress'
+                - $ref: '#/components/schemas/PhoneAddress'
+                - $ref: '#/components/schemas/SocialNetworkAddress'
 
     ReadContactPoints:
       type: object
@@ -440,63 +542,6 @@ components:
         SocialAddress:
           type: string
           example: '@rosspoldark'
-
-    LocationAddress:
-      type: object
-      required:
-        - LocationAddressType
-      properties:
-        LocationId:
-          $ref: '#/components/schemas/Uuid'
-        LocationType:
-          type: string
-          enum:
-            - LOCATION_ELECTRONIC_ADDRESS
-            - LOCATION_POSTAL_ADDRESS
-            - GEOLOCATION_ADDRESS
-            - LATITUDE_ADDRESS
-            - LONGITUDE_ADDRESS
-
-    LocationElectronicAddress:
-      allOf:
-        - $ref: "#/components/schemas/LocationAddress"
-        - type: object
-          properties:
-            ElectronicAddress:
-              type: string
-              example: ross.poldark@gmail.com
-
-    LocationPostalAddress:
-      allOf:
-        - $ref: "#/components/schemas/LocationAddress"
-        - $ref: "#/components/schemas/Address"
-
-    GeolocationAddress:
-      allOf:
-        - $ref: "#/components/schemas/LocationAddress"
-        - type: object
-          properties:
-            Geolocation:
-              type: string
-              example: some geolocation
-
-    LatitudeAddress:
-      allOf:
-        - $ref: "#/components/schemas/LocationAddress"
-        - type: object
-          properties:
-            LatitudeAddress:
-              type: string
-              example: some latitude address
-
-    LongitudeAddress:
-      allOf:
-        - $ref: "#/components/schemas/LocationAddress"
-        - type: object
-          properties:
-            LongitudeAddress:
-              type: string
-              example: some longitude address
 
     Relationship:
       type: object
