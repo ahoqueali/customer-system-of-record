@@ -111,6 +111,24 @@ paths:
                 $ref: '#/components/schemas/ReadLocations'
 
   '/customers/{CustomerId}/contact-points':
+    post:
+      tags:
+        - Customer
+      operationId: saveContacts
+      parameters:
+        - name: CustomerId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/Uuid"
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WriteContactPoint'
+
     get:
       tags:
         - Customer
@@ -284,20 +302,6 @@ components:
         - CURRENT_LOCATION
         - PREVIOUS_LOCATION
 
-    ReadContactPoints:
-      type: object
-      properties:
-        Data:
-          type: object
-          properties:
-            Contact:
-              type: array
-              items:
-                anyOf:
-                  - $ref: '#/components/schemas/ElectronicAddress'
-                  - $ref: '#/components/schemas/PostalAddress'
-                  - $ref: '#/components/schemas/PhoneAddress'
-                  - $ref: '#/components/schemas/SocialAddress'
 
     ReadRoles:
       type: object
@@ -323,7 +327,40 @@ components:
               items:
                 $ref: '#/components/schemas/Relationship'
 
-    Contact:
+    WriteContactPoint:
+      type: object
+      properties:
+        Data:
+          type: object
+          properties:
+            Contact:
+              type: array
+              items:
+                oneOf:
+                  - $ref: '#/components/schemas/ElectronicAddress'
+                  - $ref: '#/components/schemas/PostalAddress'
+                  - $ref: '#/components/schemas/PhoneAddress'
+                  - $ref: '#/components/schemas/SocialAddress'
+                discriminator:
+                  propertyName: ContactType
+
+
+    ReadContactPoints:
+      type: object
+      properties:
+        Data:
+          type: object
+          properties:
+            Contact:
+              type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/ElectronicAddress'
+                  - $ref: '#/components/schemas/PostalAddress'
+                  - $ref: '#/components/schemas/PhoneAddress'
+                  - $ref: '#/components/schemas/SocialAddress'
+
+    ElectronicAddress:
       type: object
       required:
         - ContactType
@@ -332,20 +369,59 @@ components:
           $ref: '#/components/schemas/Uuid'
         ContactType:
           type: string
-          enum:
-            - ELECTRONIC_ADDRESS
-            - POSTAL_ADDRESS
-            - PHONE_ADDRESS
-            - SOCIAL_ADDRESS
+        ElectronicAddress:
+          type: string
+          example: ross.poldark@gmail.com
 
-    ElectronicAddress:
+    Address:
+      type: object
+      properties:
+        Line1:
+          type: string
+        Line2:
+          type: string
+        Line3:
+          type: string
+        Line4:
+          type: string
+
+    PostalAddress:
       allOf:
-        - $ref: "#/components/schemas/Contact"
-        - type: object
-          properties:
-            ElectronicAddress:
-              type: string
-              example: ross.poldark@gmail.com
+        - $ref: "#/components/schemas/Address"
+      type: object
+      required:
+        - ContactType
+      properties:
+        ContactId:
+          $ref: '#/components/schemas/Uuid'
+        ContactType:
+          type: string
+
+    PhoneAddress:
+      type: object
+      required:
+        - ContactType
+      properties:
+        ContactId:
+          $ref: '#/components/schemas/Uuid'
+        ContactType:
+          type: string
+        PhoneAddress:
+          type: string
+          example: 0694234332434
+
+    SocialAddress:
+      type: object
+      required:
+        - ContactType
+      properties:
+        ContactId:
+          $ref: '#/components/schemas/Uuid'
+        ContactType:
+          type: string
+        SocialAddress:
+          type: string
+          example: '@rosspoldark'
 
     LocationAddress:
       type: object
@@ -403,41 +479,6 @@ components:
             LongitudeAddress:
               type: string
               example: some longitude address
-
-    PostalAddress:
-      allOf:
-        - $ref: "#/components/schemas/Contact"
-        - $ref: "#/components/schemas/Address"
-
-    Address:
-      type: object
-      properties:
-        Line1:
-          type: string
-        Line2:
-          type: string
-        Line3:
-          type: string
-        Line4:
-          type: string
-
-    PhoneAddress:
-      allOf:
-        - $ref: "#/components/schemas/Contact"
-        - type: object
-          properties:
-            PhoneAddress:
-              type: string
-              example: 0694234332434
-
-    SocialAddress:
-      allOf:
-        - $ref: "#/components/schemas/Contact"
-        - type: object
-          properties:
-            SocialAddress:
-              type: string
-              example: '@rosspoldark'
 
     Relationship:
       type: object
